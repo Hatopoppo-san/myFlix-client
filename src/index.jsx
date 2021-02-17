@@ -9,7 +9,7 @@ import './index.scss';
 // Main conponent (will eventually use all the others)
 class MyFlixApplication extends React.Component {
   render(){
-    return < MainView/>;
+    return <MainView/>;
   }
 }
 

@@ -21,7 +21,7 @@ export class MainView extends React.Component {
     .then(response => {
       // Assign the result to the state
       this.setState({
-        movies: resoponse.data
+        movies: response.data
       });
     })
     .catch(function (error){
@@ -35,13 +35,13 @@ export class MainView extends React.Component {
       const { movies } = this.state;
 
       // Before the movies have been loaded
-      if(!movies) return <div classname="main-view" />;
+      if(!movies) return <div className="main-view" />;
 
     return(
       <div className="main-view">
         { movies.map(movie => (
-          <div className="movie-card" key={movie._id}>{mopvie.Title}</div>
-        ))};
+          <div className="movie-card" key={movie._id}>{movie.Title}</div>
+        ))}
       </div>
     );
   }
