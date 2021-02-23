@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export class MovieView extends React.Component {
 
   constructor(){
@@ -32,7 +33,7 @@ export class MovieView extends React.Component {
          <span className="label">Director: </span>
          <span className="value">{movie.Director.Name}</span>
        </div>
-       <button onClick={() => this.props.onBackClick}>Back</button>
+       <a href="http://localhost:1234"><button>Back</button></a>
      </div>
      
    );

@@ -31712,8 +31712,6 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
   _createClass(MovieView, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var movie = this.props.movie;
       if (!movie) return null;
       return _react.default.createElement("div", {
@@ -31745,11 +31743,9 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, "Director: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Name)), _react.default.createElement("button", {
-        onClick: function onClick() {
-          return _this2.props.onBackClick;
-        }
-      }, "Back"));
+      }, movie.Director.Name)), _react.default.createElement("a", {
+        href: "http://localhost:1234"
+      }, _react.default.createElement("button", null, "Back")));
     }
   }]);
 
@@ -31878,10 +31874,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             return _this3.onMovieClick(movie);
           }
         });
-      }), _react.default.createElement(_movieView.MovieView, {
-        onBackClick: function onBackClick() {
-          return _this3.onMovieBackClick();
-        }
       }));
     }
   }]);
