@@ -69,6 +69,7 @@ export class MainView extends React.Component {
               />
             ))
           )}
+          <MovieView onBackClick={()=> this.onMovieBackClick()} />
         </div>
       );
     }
