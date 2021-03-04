@@ -31869,7 +31869,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       return _react.default.createElement("div", {
         className: "main-view"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
-        movie: selectedMovie
+        movie: selectedMovie,
+        onBackClick: function onBackClick() {
+          return _this3.onMovieBackClick();
+        }
       }) : movies.map(function (movie) {
         return _react.default.createElement(_movieCard.MovieCard, {
           key: movie._id,
@@ -31878,10 +31881,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             return _this3.onMovieClick(movie);
           }
         });
-      }), _react.default.createElement(_movieView.MovieView, {
-        onBackClick: function onBackClick() {
-          return _this3.onMovieBackClick();
-        }
       }));
     }
   }]);

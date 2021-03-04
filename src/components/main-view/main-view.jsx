@@ -59,6 +59,7 @@ export class MainView extends React.Component {
           {selectedMovie ? (
             <MovieView
               movie={selectedMovie}
+              onBackClick={()=> this.onMovieBackClick()}
             />
           ) : (
             movies.map((movie) => (
@@ -69,7 +70,6 @@ export class MainView extends React.Component {
               />
             ))
           )}
-          <MovieView onBackClick={()=> this.onMovieBackClick()} />
         </div>
       );
     }
