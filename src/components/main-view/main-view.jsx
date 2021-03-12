@@ -4,11 +4,10 @@ import axios from "axios";
 import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { RegistrationView } from "../registration-view/registration-view";
 
 export class MainView extends React.Component {
   constructor() {
-    // Call the superclass constructor
-    // so React can initialize it
     super();
     this.state = {
       movies: null,
@@ -63,7 +62,12 @@ export class MainView extends React.Component {
     // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
 
     if (!user)
-      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+      return (
+        <div>
+          <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+          <RegistrationView />
+        </div>
+      );
 
     // Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
