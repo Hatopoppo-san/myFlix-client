@@ -1,10 +1,10 @@
-$color: steelblue;
-
 * {
   font-size: 100%;
   font-family: "Arimo", sans-serif;
 }
 
 .my-flix {
-  color: $color;
+  color: steelblue;
 }
+
+/*# sourceMappingURL=/src.80ee2152.css.map */

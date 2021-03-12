@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAEA;EACE;EACA;;;AAGF;EACE,OARM","file":"src.80ee2152.css","sourceRoot":"../src","sourcesContent":["$color: steelblue;\n\n* {\n  font-size: 100%;\n  font-family: \"Arimo\", sans-serif;\n}\n\n.my-flix {\n  color: $color;\n}\n"]}

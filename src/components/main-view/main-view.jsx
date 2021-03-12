@@ -1,7 +1,11 @@
 import React from "react";
 import axios from "axios";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./main-view.scss";
 
 import { LoginView } from "../login-view/login-view";
+import { NavigationView } from "../navigation-view/navigation-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { RegistrationView } from "../registration-view/registration-view";
@@ -64,6 +68,7 @@ export class MainView extends React.Component {
     if (!user)
       return (
         <div>
+          <h1 id="main-title">MyFlixDB</h1>
           <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
           <RegistrationView />
         </div>
@@ -73,22 +78,26 @@ export class MainView extends React.Component {
     if (!movies) return <div className="main-view" />;
 
     return (
-      <div className="main-view">
+      <Row className="main-view justify-content-md-center">
         {selectedMovie ? (
-          <MovieView
-            movie={selectedMovie}
-            onBackClick={() => this.onMovieBackClick()}
-          />
+          <Col xs={4}>
+            <MovieView
+              movie={selectedMovie}
+              onBackClick={() => this.onMovieBackClick()}
+            />
+          </Col>
         ) : (
           movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              onClick={(movie) => this.onMovieClick(movie)}
-            />
+            <Col xs={4}>
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                onClick={(movie) => this.onMovieClick(movie)}
+              />
+            </Col>
           ))
         )}
-      </div>
+      </Row>
     );
   }
 }

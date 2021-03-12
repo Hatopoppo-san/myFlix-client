@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import "./registration-view.scss";
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState("");
@@ -13,46 +16,50 @@ export function RegistrationView(props) {
 
   return (
     <div>
-      <form>
-        <input
-          type="text"
-          name="username"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+      <Form>
+        <Form.Group controlId="FormNewUsername">
+          <Form.Label>Username: </Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <Form.Group controlId="FormNewEmail">
+          <Form.Label>Email: </Form.Label>
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-        <input
-          type="date"
-          name="birthdate"
-          placeholder="Birthdate"
-          value={birthdate}
-          onChange={(e) => setBirthdate(e.target.value)}
-          required
-        />
+        <Form.Group controlId="FormNewBirthdate">
+          <Form.Label>Birthdate: </Form.Label>
+          <Form.Control
+            type="date"
+            value={birthdate}
+            onChange={(e) => setBirthdate(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" onClick={registerNewUser}>
+        <Form.Group controlId="FormNewUserPassword">
+          <Form.Label>Password: </Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Button type="submit" variant="primary" onClick={registerNewUser}>
           Register
-        </button>
-      </form>
+        </Button>
+      </Form>
     </div>
   );
 }
