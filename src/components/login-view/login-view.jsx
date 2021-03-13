@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./login-view.scss";
+import RegistrationView from "../registration-view/registration-view";
 
 export function LoginView(props) {
   const [username, setUsername] = useState("");
@@ -20,25 +21,33 @@ export function LoginView(props) {
     <div className="Login">
       <Form>
         <Form.Group controlId="formUsername">
-          <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
 
         <Form.Group controlId="formPassword">
-          <Form.Label>Password:</Form.Label>
           <Form.Control
             type="text"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
         <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Submit
+          Login
         </Button>
+        {/* Link to RegistrationView doesn't work, "expected string"<p>
+          Are you a new user? <br />
+          Register{" "}
+          <a link={<RegistrationView />} rel="registration link ">
+            here
+          </a>
+          !
+  </p> */}
       </Form>
     </div>
   );

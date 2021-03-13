@@ -1,4 +1,12 @@
 .mainNav {
   width: 100%;
   background-color: #d64161;
+  position: fixed;
+  top: 0;
+  z-index: 9;
+}
+
+#main-logo {
+  font-family: "Pacifico", cursive;
+  color: #111;
 }

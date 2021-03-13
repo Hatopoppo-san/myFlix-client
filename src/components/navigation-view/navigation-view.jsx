@@ -9,8 +9,10 @@ import "./navigation-view.scss";
 
 export function NavigationView() {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
-      <Navbar.Brand href="#home">MyFlix</Navbar.Brand>
+    <Navbar className="mainNav" variant="light" expand="lg">
+      <Navbar.Brand id="main-logo" href="#home">
+        MyFlix
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
