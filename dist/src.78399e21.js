@@ -37765,7 +37765,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         id: "login"
       }, _react.default.createElement("h1", {
         id: "main-title"
-      }, "MyFlixDB"), _react.default.createElement(_loginView.LoginView, {
+      }, "MyFlixDB"), _react.default.createElement("h5", null, "Your personal movie database"), _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
         }

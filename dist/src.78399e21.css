@@ -6,10 +6,14 @@ div {
   width: 100%;
 }
 
+#login h5 {
+  text-align: center;
+}
+
 #main-title {
   font-family: "Pacifico", cursive;
   padding-top: 50px;
-  margin-bottom: 0;
+  padding-bottom: 20px;
 }
 
 #login {
@@ -23,7 +27,7 @@ div {
 }
 @media all and (min-width: 480px) {
   .Login {
-    padding: 60px 0;
+    padding: 30px;
   }
 
   .Login form {

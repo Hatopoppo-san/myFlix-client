@@ -69,6 +69,7 @@ export class MainView extends React.Component {
       return (
         <div id="login">
           <h1 id="main-title">MyFlixDB</h1>
+          <h5>Your personal movie database</h5>
           <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
           <RegistrationView />
         </div>
