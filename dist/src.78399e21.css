@@ -11,6 +11,10 @@
     max-width: 320px;
   }
 }
+.mainNav {
+  width: 100%;
+  background-color: #d64161;
+}
 * {
   font-size: 100%;
   font-family: "Arimo", sans-serif;

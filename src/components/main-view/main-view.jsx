@@ -78,26 +78,29 @@ export class MainView extends React.Component {
     if (!movies) return <div className="main-view" />;
 
     return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie ? (
-          <Col xs={4}>
-            <MovieView
-              movie={selectedMovie}
-              onBackClick={() => this.onMovieBackClick()}
-            />
-          </Col>
-        ) : (
-          movies.map((movie) => (
+      <div>
+        <NavigationView />
+        <Row className="main-view justify-content-md-center">
+          {selectedMovie ? (
             <Col xs={4}>
-              <MovieCard
-                key={movie._id}
-                movie={movie}
-                onClick={(movie) => this.onMovieClick(movie)}
+              <MovieView
+                movie={selectedMovie}
+                onBackClick={() => this.onMovieBackClick()}
               />
             </Col>
-          ))
-        )}
-      </Row>
+          ) : (
+            movies.map((movie) => (
+              <Col xs={4}>
+                <MovieCard
+                  key={movie._id}
+                  movie={movie}
+                  onClick={(movie) => this.onMovieClick(movie)}
+                />
+              </Col>
+            ))
+          )}
+        </Row>
+      </div>
     );
   }
 }

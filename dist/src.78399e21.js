@@ -37040,7 +37040,12 @@ Nav.Item = _NavItem.default;
 Nav.Link = _NavLink.default;
 var _default = Nav;
 exports.default = _default;
-},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","classnames":"../node_modules/classnames/index.js","prop-types-extra/lib/all":"../node_modules/prop-types-extra/lib/all.js","react":"../node_modules/react/index.js","uncontrollable":"../node_modules/uncontrollable/lib/esm/index.js","./ThemeProvider":"../node_modules/react-bootstrap/esm/ThemeProvider.js","./NavbarContext":"../node_modules/react-bootstrap/esm/NavbarContext.js","./CardContext":"../node_modules/react-bootstrap/esm/CardContext.js","./AbstractNav":"../node_modules/react-bootstrap/esm/AbstractNav.js","./NavItem":"../node_modules/react-bootstrap/esm/NavItem.js","./NavLink":"../node_modules/react-bootstrap/esm/NavLink.js"}],"components/navigation-view/navigation-view.jsx":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","classnames":"../node_modules/classnames/index.js","prop-types-extra/lib/all":"../node_modules/prop-types-extra/lib/all.js","react":"../node_modules/react/index.js","uncontrollable":"../node_modules/uncontrollable/lib/esm/index.js","./ThemeProvider":"../node_modules/react-bootstrap/esm/ThemeProvider.js","./NavbarContext":"../node_modules/react-bootstrap/esm/NavbarContext.js","./CardContext":"../node_modules/react-bootstrap/esm/CardContext.js","./AbstractNav":"../node_modules/react-bootstrap/esm/AbstractNav.js","./NavItem":"../node_modules/react-bootstrap/esm/NavItem.js","./NavLink":"../node_modules/react-bootstrap/esm/NavLink.js"}],"components/navigation-view/navigation-view.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../.nvm/versions/node/v15.4.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/navigation-view/navigation-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37059,6 +37064,8 @@ var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 var _FormControl = _interopRequireDefault(require("react-bootstrap/FormControl"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+require("./navigation-view.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37092,7 +37099,7 @@ function NavigationView() {
     variant: "outline-success"
   }, "Search"))));
 }
-},{"react":"../node_modules/react/index.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Nav":"../node_modules/react-bootstrap/esm/Nav.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/FormControl":"../node_modules/react-bootstrap/esm/FormControl.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Nav":"../node_modules/react-bootstrap/esm/Nav.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/FormControl":"../node_modules/react-bootstrap/esm/FormControl.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./navigation-view.scss":"components/navigation-view/navigation-view.scss"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37753,7 +37760,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
-      return _react.default.createElement(_Row.default, {
+      return _react.default.createElement("div", null, _react.default.createElement(_navigationView.NavigationView, null), _react.default.createElement(_Row.default, {
         className: "main-view justify-content-md-center"
       }, selectedMovie ? _react.default.createElement(_Col.default, {
         xs: 4
@@ -37772,7 +37779,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             return _this3.onMovieClick(movie);
           }
         }));
-      }));
+      })));
     }
   }]);
 
