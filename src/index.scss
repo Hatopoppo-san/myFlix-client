@@ -1,5 +1,18 @@
 $color: steelblue;
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font-family: "Spartan", sans-serif;
+}
+
+Container {
+  margin: 0;
+  padding: 0;
+}
+
 .my-flix {
   color: $color;
 }
