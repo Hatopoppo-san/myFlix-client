@@ -34440,6 +34440,8 @@ var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 require("./login-view.scss");
 
 var _registrationView = _interopRequireDefault(require("../registration-view/registration-view"));
@@ -34475,12 +34477,17 @@ function LoginView(props) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    console.log(username, password);
     /* Send a request to the server for authentication */
 
-    /* then call props.onLoggedIn(username) */
-
-    props.onLoggedIn(username);
+    _axios.default.post("https://my-flix-api-practice.herokuapp.com/login", {
+      Username: username,
+      Password: password
+    }).then(function (response) {
+      var data = response.data;
+      props.onLoggedIn(data);
+    }).catch(function (e) {
+      console.log("no such user");
+    });
   };
 
   return _react.default.createElement("div", {
@@ -34553,7 +34560,7 @@ function LoginView(props) {
 //     );
 //   }
 // }
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./login-view.scss":"components/login-view/login-view.scss","../registration-view/registration-view":"components/registration-view/registration-view.jsx"}],"../node_modules/invariant/browser.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss","../registration-view/registration-view":"components/registration-view/registration-view.jsx"}],"../node_modules/invariant/browser.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -37901,7 +37908,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50529" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62525" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
