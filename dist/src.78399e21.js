@@ -37252,7 +37252,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // import NavDropdown from "react-bootstrap/NavDropdown";
 function NavigationView() {
-  return _react.default.createElement(_Navbar.default, {
+  return _react.default.createElement("div", {
+    className: "nav-container"
+  }, _react.default.createElement("div", {
+    className: "container"
+  }, _react.default.createElement(_Navbar.default, {
     className: "mainNav",
     variant: "light",
     expand: "lg"
@@ -37279,7 +37283,7 @@ function NavigationView() {
     className: "mr-sm-2"
   }), _react.default.createElement(_Button.default, {
     variant: "outline-success"
-  }, "Search"))));
+  }, "Search"))))));
 }
 },{"react":"../node_modules/react/index.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Nav":"../node_modules/react-bootstrap/esm/Nav.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/FormControl":"../node_modules/react-bootstrap/esm/FormControl.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./navigation-view.scss":"components/navigation-view/navigation-view.scss"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
 "use strict";
@@ -37897,7 +37901,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61166" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50529" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
