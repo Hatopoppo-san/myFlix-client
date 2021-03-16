@@ -51658,15 +51658,15 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, DirectorView);
 
     _this = _super.call(this);
-    _this.state = "";
+    _this.state = {};
     return _this;
   }
 
   _createClass(DirectorView, [{
     key: "render",
     value: function render() {
-      var movie = this.props.movie;
-      if (!movie) return null;
+      var director = this.props.director;
+      if (!director) return null;
       return _react.default.createElement("div", {
         className: "direrctor-container"
       }, _react.default.createElement("div", {
@@ -51675,25 +51675,25 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, " Name: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Name)), _react.default.createElement("div", {
+      }, director.Name)), _react.default.createElement("div", {
         className: "director-description"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Description: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Description)), _react.default.createElement("div", {
+      }, director.Description)), _react.default.createElement("div", {
         className: "director-birth"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Birth: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Birth)), _react.default.createElement("div", {
+      }, director.Birth)), _react.default.createElement("div", {
         className: "director-death"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Death: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Death)));
+      }, director.Death)));
     }
   }]);
 
