@@ -40,7 +40,7 @@ export class MovieView extends React.Component {
             <Button variant="link">Director</Button>
           </Link>
         </div>
-        <Button variant="secondary" onClick={() => this.props.onBackClick()}>
+        <Button variant="secondary" href="/">
           Back
         </Button>
       </div>

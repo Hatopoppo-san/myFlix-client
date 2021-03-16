@@ -49,17 +49,15 @@ export function LoginView(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Login
-        </Button>
-        {/* Link to RegistrationView doesn't work, "expected string"<p>
-          Are you a new user? <br />
-          Register{" "}
-          <a link={<RegistrationView />} rel="registration link ">
-            here
-          </a>
-          !
-  </p> */}
+        <div className="login-register-button">
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Login
+          </Button>
+          <p className="or">or</p>
+          <Button variant="primary" href="/register">
+            New user
+          </Button>
+        </div>
       </Form>
     </div>
   );

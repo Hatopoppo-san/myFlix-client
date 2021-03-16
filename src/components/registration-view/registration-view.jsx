@@ -42,7 +42,6 @@ export function RegistrationView(props) {
             required
           />
         </Form.Group>
-
         <Form.Group controlId="FormNewUserPassword">
           <Form.Label>Password: </Form.Label>
           <Form.Control
