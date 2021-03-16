@@ -51675,7 +51675,25 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, " Name: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.director.Name)));
+      }, movie.Director.Name)), _react.default.createElement("div", {
+        className: "director-description"
+      }, _react.default.createElement("span", {
+        className: "label"
+      }, "Description: "), _react.default.createElement("span", {
+        className: "value"
+      }, movie.Director.Description)), _react.default.createElement("div", {
+        className: "director-birth"
+      }, _react.default.createElement("span", {
+        className: "label"
+      }, "Birth: "), _react.default.createElement("span", {
+        className: "value"
+      }, movie.Director.Birth)), _react.default.createElement("div", {
+        className: "director-death"
+      }, _react.default.createElement("span", {
+        className: "label"
+      }, "Death: "), _react.default.createElement("span", {
+        className: "value"
+      }, movie.Director.Death)));
     }
   }]);
 
