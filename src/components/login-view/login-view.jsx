@@ -23,7 +23,7 @@ export function LoginView(props) {
         props.onLoggedIn(data);
       })
       .catch((e) => {
-        console.log("no such user");
+        console.log(e);
       });
   };
 
@@ -33,6 +33,7 @@ export function LoginView(props) {
         <Form.Group controlId="formUsername">
           <Form.Control
             type="text"
+            required
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -41,7 +42,8 @@ export function LoginView(props) {
 
         <Form.Group controlId="formPassword">
           <Form.Control
-            type="text"
+            type="password"
+            required
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

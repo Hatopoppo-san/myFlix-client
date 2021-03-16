@@ -12,7 +12,7 @@ export function NavigationView() {
     <div className="nav-container">
       <div className="container">
         <Navbar className="mainNav" variant="light" expand="lg">
-          <Navbar.Brand id="main-logo" href="#home">
+          <Navbar.Brand id="main-logo" href="#">
             MyFlix
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -21,6 +21,14 @@ export function NavigationView() {
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="movies">Movies</Nav.Link>
               <Nav.Link href="mypage">Mypage</Nav.Link>
+              <Button
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("user");
+                }}
+              >
+                log out
+              </Button>
             </Nav>
             <Form inline>
               <FormControl
