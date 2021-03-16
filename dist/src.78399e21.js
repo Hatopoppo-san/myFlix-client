@@ -51875,21 +51875,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }).catch(function (error) {
         console.log(error);
       });
-    } // getDirectors(token) {
-    //   axios
-    //     .get("https://my-flix-api-practice.herokuapp.com/movies/director/:Name", {
-    //       headers: { Authorization: `Bearer ${token}` },
-    //     })
-    //     .then((response) => {
-    //       this.setState({
-    //         director: response.data,
-    //       });
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // }
-
+    }
   }, {
     key: "getUsers",
     value: function getUsers(token) {
@@ -51919,18 +51905,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         });
         this.getMovies(accessToken);
       }
-    } // onMovieClick(movie) {
-    //   this.setState({
-    //     selectedMovie: movie,
-    //   });
-    // }
-    // // Create back click function
-    // onMovieBackClick() {
-    //   this.setState({
-    //     selectedMovie: null,
-    //   });
-    // }
-    // When a user successfully logs in, this function updates the `user` property in state to that *particular user*
+    } // When a user successfully logs in, this function updates the `user` property in state to that *particular user*
 
   }, {
     key: "onLoggedIn",
@@ -51951,14 +51926,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this$state = this.state,
           movies = _this$state.movies,
           user = _this$state.user; // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
-      // if (!user)
-      //   return (
-      //     <div id="login">
-      //       <h1 id="main-title">MyFlixDB</h1>
-      //       <h5>Your personal movie database</h5>
-      //       <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-      //     </div>
-      //   );
       // Before the movies have been loaded
 
       if (!movies) return _react.default.createElement("div", {
