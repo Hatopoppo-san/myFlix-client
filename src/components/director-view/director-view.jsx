@@ -6,7 +6,6 @@ import "./director-view.scss";
 export class DirectorView extends React.Component {
   constructor() {
     super();
-
     this.state = {};
   }
 
@@ -33,6 +32,9 @@ export class DirectorView extends React.Component {
           <span className="label">Death: </span>
           <span className="value">{director.Death}</span>
         </div>
+        <Link to={`/`}>
+          <Button variant="link">Back</Button>
+        </Link>
       </div>
     );
   }

@@ -18,6 +18,26 @@ div {
   vertical-align: middle;
 }
 
-.main-view {
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+} 
+
+.movie-card-container{
   padding-top: 60px;
+}
+
+.mainNav {
+  width: 100%;
+  background-color: #E7717D;
+  top: 0;
+  z-index: 9;
+}
+
+
+#main-logo {
+  font-family: "Pacifico", cursive;
+  color: #111;
 }
