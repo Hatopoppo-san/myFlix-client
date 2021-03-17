@@ -11,15 +11,15 @@ import {
 } from "react-bootstrap";
 import "./main-view.scss";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 
 import { LoginView } from "../login-view/login-view";
-import { NavigationView } from "../navigation-view/navigation-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
+//import { ProfileView } from "../profile-view/profile-view";
 
 export class MainView extends React.Component {
   constructor() {
@@ -78,6 +78,7 @@ export class MainView extends React.Component {
 
   render() {
     const { movies, user } = this.state;
+    const username = localStorage.getItem("user");
 
     // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
     // Before the movies have been loaded
@@ -110,8 +111,9 @@ export class MainView extends React.Component {
                         <Navbar.Collapse id='basic-navbar-nav'>
                           <Nav className='mr-auto'>
                             <Nav.Link href='/'>Home</Nav.Link>
-                            <Nav.Link href='/'>Movies</Nav.Link>
-                            <Nav.Link href='/users/:Username'>Mypage</Nav.Link>
+                            <Nav.Link href={`/users/${username}`}>
+                              Mypage
+                            </Nav.Link>
                             <Button onClick={() => this.logoutUser()}>
                               log out
                             </Button>
@@ -149,6 +151,17 @@ export class MainView extends React.Component {
               />
             )}
           />
+          {/* <Route
+            exact
+            path='/users/:Username'
+            render={({ match }) => (
+              <ProfileView
+                user={users.find(
+                  (user) => user.Username === match.params.Username
+                )}
+              />
+            )}
+          /> */}
           <Route
             exact
             path='/directors/:name'

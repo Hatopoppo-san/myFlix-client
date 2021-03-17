@@ -51334,74 +51334,7 @@ function LoginView(props) {
 //     );
 //   }
 // }
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss","../registration-view/registration-view":"components/registration-view/registration-view.jsx"}],"components/navigation-view/navigation-view.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../.nvm/versions/node/v15.4.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/navigation-view/navigation-view.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.NavigationView = NavigationView;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactBootstrap = require("react-bootstrap");
-
-require("./navigation-view.scss");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import Nav from "react-bootstrap/Nav";
-// import Form from "react-bootstrap/Form";
-// import FormControl from "react-bootstrap/FormControl";
-// import Button from "react-bootstrap/Button";
-function NavigationView() {
-  function logoutUser() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    window.open("/", "_self");
-  }
-
-  return _react.default.createElement("div", {
-    className: "nav-container"
-  }, _react.default.createElement("div", {
-    className: "container"
-  }, _react.default.createElement(_reactBootstrap.Navbar, {
-    className: "mainNav",
-    variant: "light",
-    expand: "lg"
-  }, _react.default.createElement(_reactBootstrap.Navbar.Brand, {
-    id: "main-logo",
-    href: "/"
-  }, "MyFlix"), _react.default.createElement(_reactBootstrap.Navbar.Toggle, {
-    "aria-controls": "basic-navbar-nav"
-  }), _react.default.createElement(_reactBootstrap.Navbar.Collapse, {
-    id: "basic-navbar-nav"
-  }, _react.default.createElement(_reactBootstrap.Nav, {
-    className: "mr-auto"
-  }, _react.default.createElement(_reactBootstrap.Nav.Link, {
-    href: "/"
-  }, "Home"), _react.default.createElement(_reactBootstrap.Nav.Link, {
-    href: "/"
-  }, "Movies"), _react.default.createElement(_reactBootstrap.Nav.Link, {
-    href: "/users/:Username"
-  }, "Mypage"), _react.default.createElement(_reactBootstrap.Button, {
-    onClick: logoutUser
-  }, "log out")), _react.default.createElement(_reactBootstrap.Form, {
-    inline: true
-  }, _react.default.createElement(_reactBootstrap.FormControl, {
-    type: "text",
-    placeholder: "Search",
-    className: "mr-sm-2"
-  }), _react.default.createElement(_reactBootstrap.Button, {
-    variant: "outline-success"
-  }, "Search"))))));
-}
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./navigation-view.scss":"components/navigation-view/navigation-view.scss"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss","../registration-view/registration-view":"components/registration-view/registration-view.jsx"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51660,7 +51593,9 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
   _createClass(DirectorView, [{
     key: "render",
     value: function render() {
-      var director = this.props.director;
+      var _this$props = this.props,
+          movie = _this$props.movie,
+          director = _this$props.director;
       if (!director) return null;
       return _react.default.createElement("div", {
         className: "direrctor-container"
@@ -51670,25 +51605,25 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, " Name: "), _react.default.createElement("span", {
         className: "value"
-      }, director.Name)), _react.default.createElement("div", {
+      }, movie.Director.Name)), _react.default.createElement("div", {
         className: "director-description"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Description: "), _react.default.createElement("span", {
         className: "value"
-      }, director.Description)), _react.default.createElement("div", {
+      }, movie.Director.Description)), _react.default.createElement("div", {
         className: "director-birth"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Birth: "), _react.default.createElement("span", {
         className: "value"
-      }, director.Birth)), _react.default.createElement("div", {
+      }, movie.Director.Birth)), _react.default.createElement("div", {
         className: "director-death"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Death: "), _react.default.createElement("span", {
         className: "value"
-      }, director.Death)), _react.default.createElement(_reactRouterDom.Link, {
+      }, movie.Director.Death)), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_reactBootstrap.default, {
         variant: "link"
@@ -51801,8 +51736,6 @@ var _reactRouterDom = require("react-router-dom");
 
 var _loginView = require("../login-view/login-view");
 
-var _navigationView = require("../navigation-view/navigation-view");
-
 var _movieCard = require("../movie-card/movie-card");
 
 var _movieView = require("../movie-view/movie-view");
@@ -51837,6 +51770,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+//import { ProfileView } from "../profile-view/profile-view";
 var MainView = /*#__PURE__*/function (_React$Component) {
   _inherits(MainView, _React$Component);
 
@@ -51913,7 +51847,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       var _this$state = this.state,
           movies = _this$state.movies,
-          user = _this$state.user; // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
+          user = _this$state.user;
+      var username = localStorage.getItem("user"); // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
       // Before the movies have been loaded
 
       if (!movies) return _react.default.createElement("div", {
@@ -51954,9 +51889,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           }, _react.default.createElement(_reactBootstrap.Nav.Link, {
             href: "/"
           }, "Home"), _react.default.createElement(_reactBootstrap.Nav.Link, {
-            href: "/"
-          }, "Movies"), _react.default.createElement(_reactBootstrap.Nav.Link, {
-            href: "/users/:Username"
+            href: "/users/".concat(username)
           }, "Mypage"), _react.default.createElement(_reactBootstrap.Button, {
             onClick: function onClick() {
               return _this3.logoutUser();
@@ -52034,7 +51967,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MainView = MainView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./main-view.scss":"components/main-view/main-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../login-view/login-view":"components/login-view/login-view.jsx","../navigation-view/navigation-view":"components/navigation-view/navigation-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./main-view.scss":"components/main-view/main-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);

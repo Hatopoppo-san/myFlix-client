@@ -10,30 +10,30 @@ export class DirectorView extends React.Component {
   }
 
   render() {
-    const { director } = this.props;
+    const { movie, director } = this.props;
 
     if (!director) return null;
 
     return (
-      <div className="direrctor-container">
-        <div className="director-name">
-          <span className="label"> Name: </span>
-          <span className="value">{director.Name}</span>
+      <div className='direrctor-container'>
+        <div className='director-name'>
+          <span className='label'> Name: </span>
+          <span className='value'>{movie.Director.Name}</span>
         </div>
-        <div className="director-description">
-          <span className="label">Description: </span>
-          <span className="value">{director.Description}</span>
+        <div className='director-description'>
+          <span className='label'>Description: </span>
+          <span className='value'>{movie.Director.Description}</span>
         </div>
-        <div className="director-birth">
-          <span className="label">Birth: </span>
-          <span className="value">{director.Birth}</span>
+        <div className='director-birth'>
+          <span className='label'>Birth: </span>
+          <span className='value'>{movie.Director.Birth}</span>
         </div>
-        <div className="director-death">
-          <span className="label">Death: </span>
-          <span className="value">{director.Death}</span>
+        <div className='director-death'>
+          <span className='label'>Death: </span>
+          <span className='value'>{movie.Director.Death}</span>
         </div>
         <Link to={`/`}>
-          <Button variant="link">Back</Button>
+          <Button variant='link'>Back</Button>
         </Link>
       </div>
     );
