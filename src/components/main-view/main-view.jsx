@@ -19,7 +19,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
-//import { ProfileView } from "../profile-view/profile-view";
+import { ProfileView } from "../profile-view/profile-view";
 
 export class MainView extends React.Component {
   constructor() {
@@ -151,17 +151,13 @@ export class MainView extends React.Component {
               />
             )}
           />
-          {/* <Route
+          <Route
             exact
-            path='/users/:Username'
-            render={({ match }) => (
-              <ProfileView
-                user={users.find(
-                  (user) => user.Username === match.params.Username
-                )}
-              />
-            )}
-          /> */}
+            path='/users/:username'
+            render={() => {
+              return <ProfileView movies={movies} />;
+            }}
+          />
           <Route
             exact
             path='/directors/:name'
