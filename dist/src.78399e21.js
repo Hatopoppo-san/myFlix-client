@@ -51545,7 +51545,7 @@ exports.DirectorView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactBootstrap = _interopRequireDefault(require("react-bootstrap"));
+var _reactBootstrap = require("react-bootstrap");
 
 var _reactRouterDom = require("react-router-dom");
 
@@ -51593,39 +51593,37 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
   _createClass(DirectorView, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          movie = _this$props.movie,
-          director = _this$props.director;
+      var director = this.props.director;
       if (!director) return null;
       return _react.default.createElement("div", {
-        className: "direrctor-container"
+        className: "director-container"
       }, _react.default.createElement("div", {
         className: "director-name"
       }, _react.default.createElement("span", {
         className: "label"
       }, " Name: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Name)), _react.default.createElement("div", {
+      }, director.Name)), _react.default.createElement("div", {
         className: "director-description"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Description: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Description)), _react.default.createElement("div", {
+      }, director.Description)), _react.default.createElement("div", {
         className: "director-birth"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Birth: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Birth)), _react.default.createElement("div", {
+      }, director.Birth)), _react.default.createElement("div", {
         className: "director-death"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Death: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Death)), _react.default.createElement(_reactRouterDom.Link, {
+      }, director.Death)), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
-      }, _react.default.createElement(_reactBootstrap.default, {
+      }, _react.default.createElement(_reactBootstrap.Button, {
         variant: "link"
       }, "Back")));
     }
@@ -51650,7 +51648,7 @@ exports.GenreView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactBootstrap = _interopRequireDefault(require("react-bootstrap"));
+var _reactBootstrap = require("react-bootstrap");
 
 var _reactRouterDom = require("react-router-dom");
 
@@ -51701,14 +51699,24 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
       var genre = this.props.genre;
       if (!genre) return null;
       return _react.default.createElement("div", {
-        className: "gemre-container"
+        className: "genre-container"
       }, _react.default.createElement("div", {
         className: "genre-name"
       }, _react.default.createElement("span", {
         className: "label"
       }, " Name: "), _react.default.createElement("span", {
         className: "value"
-      }, genre.Name)));
+      }, genre.Name)), _react.default.createElement("div", {
+        className: "genre-name"
+      }, _react.default.createElement("span", {
+        className: "label"
+      }, " Description: "), _react.default.createElement("span", {
+        className: "value"
+      }, genre.Description)), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/"
+      }, _react.default.createElement(_reactBootstrap.Button, {
+        variant: "link"
+      }, "Back")));
     }
   }]);
 
@@ -51716,7 +51724,12 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.GenreView = GenreView;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./genre-view.scss":"components/genre-view/genre-view.scss"}],"components/profile-view/profile-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./genre-view.scss":"components/genre-view/genre-view.scss"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../.nvm/versions/node/v15.4.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/profile-view/profile-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51728,9 +51741,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _reactBootstrap = require("react-bootstrap/");
 
-var _reactRouterDom = require("react-router-dom");
+require("./profile-view.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51983,8 +51998,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_reactBootstrap.Button, {
         className: "back-button"
       }, "Back")), _react.default.createElement(_reactBootstrap.Button, {
+        style: {
+          maxWidth: "200px"
+        },
         className: "delete-user",
-        block: true,
         onClick: function onClick(e) {
           return _this3.handleDeregister(e);
         }
@@ -52001,47 +52018,48 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           return _this3.handleUpdate(e, _this3.Username, _this3.Password, _this3.Email, _this3.Birthday);
         }
       }, _react.default.createElement(_reactBootstrap.Form.Group, {
-        controlId: "formNewUsername"
-      }, _react.default.createElement(_reactBootstrap.Form.label, null, "Username: "), _react.default.createElement(_reactBootstrap.Form.Control, {
+        controlId: "formBasicUsername"
+      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username:"), _react.default.createElement(_reactBootstrap.Form.Control, {
         type: "text",
-        placeholder: "New Username",
+        placeholder: "Change Username",
         defaultValue: Username,
         onChange: function onChange(e) {
           return _this3.setUsername(e.target.value);
         }
       })), _react.default.createElement(_reactBootstrap.Form.Group, {
-        controlId: "FormBasicPassword"
+        controlId: "formBasicPassword"
       }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
         type: "password",
         placeholder: "Enter Password",
         defaultValue: "",
         onChange: function onChange(e) {
           return _this3.setPassword(e.target.value);
-        }
-      }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
-        type: "invaild"
-      }, "A password is required")), _react.default.createElement(_reactBootstrap.Form.Group, {
-        controlId: "formNewEmail"
-      }, _react.default.createElement(_reactBootstrap.Form.label, null, "Email: "), _react.default.createElement(_reactBootstrap.Form.Control, {
+        },
+        required: true
+      })), _react.default.createElement(_reactBootstrap.Form.Group, {
+        controlId: "formBasicEmail"
+      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), _react.default.createElement(_reactBootstrap.Form.Control, {
         type: "email",
-        placeholder: "New Email",
+        placeholder: "Change Email",
         defaultValue: Email,
         onChange: function onChange(e) {
           return _this3.setEmail(e.target.value);
         }
-      })), _react.default.createElement(_reactBootstrap.Form.Group, {
-        controlId: "formNewBirthday"
-      }, _react.default.createElement(_reactBootstrap.Form.label, null, "Birthday: "), _react.default.createElement(_reactBootstrap.Form.Control, {
+      }), _react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
+        type: "invalid"
+      }, "A password is required")), _react.default.createElement(_reactBootstrap.Form.Group, {
+        controlId: "formBasicBirthday"
+      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday"), _react.default.createElement(_reactBootstrap.Form.Control, {
         type: "date",
-        placeholder: "New Birthday",
+        placeholder: "Change Birthday",
         defaultValue: Birthday,
         onChange: function onChange(e) {
           return _this3.setBirthday(e.target.value);
         }
       })), _react.default.createElement(_reactBootstrap.Button, {
-        type: "submit",
         className: "update",
-        size: "xs"
+        type: "submit",
+        size: "sm"
       }, "Update")))))));
     }
   }]);
@@ -52050,7 +52068,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/":"../node_modules/react-bootstrap/esm/index.js","./profile-view.scss":"components/profile-view/profile-view.scss"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52265,7 +52283,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
         path: "/users/:username",
         render: function render() {
           return _react.default.createElement(_profileView.ProfileView, {
@@ -52273,7 +52290,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
         path: "/directors/:name",
         render: function render(_ref2) {
           var match = _ref2.match;
@@ -52289,7 +52305,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
         path: "/genres/:name",
         render: function render(_ref3) {
           var match = _ref3.match;
@@ -52298,7 +52313,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
           return _react.default.createElement(_genreView.GenreView, {
             genre: movies.find(function (m) {
-              return m.Genre.Name === match.params.Name;
+              return m.Genre.Name === match.params.name;
             }).Genre
           });
         }

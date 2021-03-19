@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, Form, Tab, Tabs, Container, Card } from "react-bootstrap/";
-
 import { Link } from "react-router-dom";
+import { Button, Form, Tab, Tabs, Container, Card } from "react-bootstrap/";
+import "./profile-view.scss";
 
 export class ProfileView extends React.Component {
   constructor(props) {
@@ -219,8 +219,8 @@ export class ProfileView extends React.Component {
                     <Button className='back-button'>Back</Button>
                   </Link>
                   <Button
+                    style={{ maxWidth: "200px" }}
                     className='delete-user'
-                    block
                     onClick={(e) => this.handleDeregister(e)}>
                     Delete Profile
                   </Button>
@@ -245,46 +245,47 @@ export class ProfileView extends React.Component {
                       this.Birthday
                     )
                   }>
-                  <Form.Group controlId='formNewUsername'>
-                    <Form.label>Username: </Form.label>
+                  <Form.Group controlId='formBasicUsername'>
+                    <Form.Label>Username:</Form.Label>
                     <Form.Control
                       type='text'
-                      placeholder='New Username'
+                      placeholder='Change Username'
                       defaultValue={Username}
                       onChange={(e) => this.setUsername(e.target.value)}
                     />
                   </Form.Group>
-                  <Form.Group controlId='FormBasicPassword'>
+                  <Form.Group controlId='formBasicPassword'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                       type='password'
                       placeholder='Enter Password'
                       defaultValue=''
                       onChange={(e) => this.setPassword(e.target.value)}
+                      required
                     />
-                    <Form.Control.Feedback type='invaild'>
-                      A password is required
-                    </Form.Control.Feedback>
                   </Form.Group>
-                  <Form.Group controlId='formNewEmail'>
-                    <Form.label>Email: </Form.label>
+                  <Form.Group controlId='formBasicEmail'>
+                    <Form.Label>Email</Form.Label>
                     <Form.Control
                       type='email'
-                      placeholder='New Email'
+                      placeholder='Change Email'
                       defaultValue={Email}
                       onChange={(e) => this.setEmail(e.target.value)}
                     />
+                    <Form.Control.Feedback type='invalid'>
+                      A password is required
+                    </Form.Control.Feedback>
                   </Form.Group>
-                  <Form.Group controlId='formNewBirthday'>
-                    <Form.label>Birthday: </Form.label>
+                  <Form.Group controlId='formBasicBirthday'>
+                    <Form.Label>Birthday</Form.Label>
                     <Form.Control
                       type='date'
-                      placeholder='New Birthday'
+                      placeholder='Change Birthday'
                       defaultValue={Birthday}
                       onChange={(e) => this.setBirthday(e.target.value)}
                     />
                   </Form.Group>
-                  <Button type='submit' className='update' size='xs'>
+                  <Button className='update' type='submit' size='sm'>
                     Update
                   </Button>
                 </Form>

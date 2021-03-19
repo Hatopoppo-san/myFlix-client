@@ -152,14 +152,12 @@ export class MainView extends React.Component {
             )}
           />
           <Route
-            exact
             path='/users/:username'
             render={() => {
               return <ProfileView movies={movies} />;
             }}
           />
           <Route
-            exact
             path='/directors/:name'
             render={({ match }) => {
               if (!movies) return <div className='main-view' />;
@@ -176,14 +174,13 @@ export class MainView extends React.Component {
             }}
           />
           <Route
-            exact
             path='/genres/:name'
             render={({ match }) => {
               if (!movies) return <div className='main-view' />;
               return (
                 <GenreView
                   genre={
-                    movies.find((m) => m.Genre.Name === match.params.Name).Genre
+                    movies.find((m) => m.Genre.Name === match.params.name).Genre
                   }
                 />
               );
