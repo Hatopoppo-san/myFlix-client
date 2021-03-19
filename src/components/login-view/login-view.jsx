@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 import "./login-view.scss";
 import RegistrationView from "../registration-view/registration-view";
 
@@ -11,43 +12,55 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
     /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
+    axios
+      .post("https://my-flix-api-practice.herokuapp.com/login", {
+        Username: username,
+        Password: password,
+      })
+      .then((response) => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch((e) => {
+        console.log(e);
+        alert(
+          "Either Username or Password, or Both are wrong. If you are a new user, please register first"
+        );
+      });
   };
 
   return (
-    <div className="Login">
+    <div className='Login'>
       <Form>
-        <Form.Group controlId="formUsername">
+        <Form.Group controlId='formUsername'>
           <Form.Control
-            type="text"
-            placeholder="Username"
+            type='text'
+            required
+            placeholder='Username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
 
-        <Form.Group controlId="formPassword">
+        <Form.Group controlId='formPassword'>
           <Form.Control
-            type="text"
-            placeholder="Password"
+            type='password'
+            required
+            placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Login
-        </Button>
-        {/* Link to RegistrationView doesn't work, "expected string"<p>
-          Are you a new user? <br />
-          Register{" "}
-          <a link={<RegistrationView />} rel="registration link ">
-            here
-          </a>
-          !
-  </p> */}
+        <div className='login-register-button'>
+          <Button variant='primary' type='submit' onClick={handleSubmit}>
+            Login
+          </Button>
+          <p className='or'>or</p>
+          <Button variant='primary' href='/register'>
+            New user
+          </Button>
+        </div>
       </Form>
     </div>
   );
