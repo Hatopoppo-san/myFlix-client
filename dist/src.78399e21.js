@@ -51252,6 +51252,7 @@ function LoginView(props) {
       props.onLoggedIn(data);
     }).catch(function (e) {
       console.log(e);
+      alert("Either Username or Password, or Both are wrong. If you are a new user, please register first");
     });
   };
 
@@ -51810,14 +51811,14 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       var token = localStorage.getItem("token");
 
       _axios.default.put("https://my-flix-api-practice.herokuapp.com/users/".concat(username), {
-        headers: {
-          Authorization: "Bearer ".concat(token)
-        }
-      }, {
         Username: newUsername ? newUsername : _this.state.Username,
         Password: _this.Password,
         Email: newEmail ? newEmail : _this.state.Email,
         Birthday: newBirthday ? newBirthday : _this.state.Birthday
+      }, {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
       }).then(function (response) {
         alert("Saved Changes");
 
@@ -51829,6 +51830,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         });
 
         localStorage.setItem("user", _this.state.Username);
+        window.open("/users/".concat(username), "_self");
       }).catch(function (error) {
         console.log(error);
       });
@@ -51893,11 +51895,12 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (res) {
         console.log("".concat(movie.Title, " was removed from your favorite"));
-        window.open("_self");
+        window.open("/users/:username", "__self");
       }).catch(function (err) {
         console.log(err);
       });
-    }
+    } //worked until here
+
   }, {
     key: "setUsername",
     value: function setUsername(input) {
@@ -51922,8 +51925,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     key: "handleDeregister",
     value: function handleDeregister(e) {
       e.preventDefault();
-      var username = localStorage("user");
-      var token = localStorage("token");
+      var username = localStorage.getItem("user");
+      var token = localStorage.getItem("token");
 
       _axios.default.delete("https://my-flix-api-practice.herokuapp.com/users/".concat(username), {
         headers: {

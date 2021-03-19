@@ -24,37 +24,40 @@ export function LoginView(props) {
       })
       .catch((e) => {
         console.log(e);
+        alert(
+          "Either Username or Password, or Both are wrong. If you are a new user, please register first"
+        );
       });
   };
 
   return (
-    <div className="Login">
+    <div className='Login'>
       <Form>
-        <Form.Group controlId="formUsername">
+        <Form.Group controlId='formUsername'>
           <Form.Control
-            type="text"
+            type='text'
             required
-            placeholder="Username"
+            placeholder='Username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
 
-        <Form.Group controlId="formPassword">
+        <Form.Group controlId='formPassword'>
           <Form.Control
-            type="password"
+            type='password'
             required
-            placeholder="Password"
+            placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <div className="login-register-button">
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+        <div className='login-register-button'>
+          <Button variant='primary' type='submit' onClick={handleSubmit}>
             Login
           </Button>
-          <p className="or">or</p>
-          <Button variant="primary" href="/register">
+          <p className='or'>or</p>
+          <Button variant='primary' href='/register'>
             New user
           </Button>
         </div>

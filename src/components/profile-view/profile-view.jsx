@@ -67,12 +67,14 @@ export class ProfileView extends React.Component {
       )
       .then((res) => {
         console.log(`${movie.Title} was removed from your favorite`);
-        window.open("_self");
+        window.open("/users/:username", "__self");
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
+  //worked until here
 
   handleUpdate = (e, newUsername, newPassword, newEmail, newBirthday) => {
     this.setState({
@@ -95,13 +97,13 @@ export class ProfileView extends React.Component {
     axios
       .put(
         `https://my-flix-api-practice.herokuapp.com/users/${username}`,
-        { headers: { Authorization: `Bearer ${token}` } },
         {
           Username: newUsername ? newUsername : this.state.Username,
           Password: this.Password,
           Email: newEmail ? newEmail : this.state.Email,
           Birthday: newBirthday ? newBirthday : this.state.Birthday,
-        }
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
         alert("Saved Changes");
@@ -112,6 +114,7 @@ export class ProfileView extends React.Component {
           Birthday: response.data.Birthday,
         });
         localStorage.setItem("user", this.state.Username);
+        window.open(`/users/${username}`, "_self");
       })
       .catch((error) => {
         console.log(error);
@@ -137,8 +140,8 @@ export class ProfileView extends React.Component {
   handleDeregister(e) {
     e.preventDefault();
 
-    const username = localStorage("user");
-    const token = localStorage("token");
+    const username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
 
     axios
       .delete(`https://my-flix-api-practice.herokuapp.com/users/${username}`, {
