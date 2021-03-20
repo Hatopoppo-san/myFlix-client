@@ -160,9 +160,7 @@ export class MainView extends React.Component {
           <Route
             path='/directors/:name'
             render={({ match }) => {
-              if (!movies) return <div className='main-view' />;
-              console.log(match.params.name);
-              console.log(movies);
+              if (!movies.length) return <div className='main-view' />;
               return (
                 <DirectorView
                   director={
@@ -176,7 +174,7 @@ export class MainView extends React.Component {
           <Route
             path='/genres/:name'
             render={({ match }) => {
-              if (!movies) return <div className='main-view' />;
+              if (!movies.length) return <div className='main-view' />;
               return (
                 <GenreView
                   genre={
