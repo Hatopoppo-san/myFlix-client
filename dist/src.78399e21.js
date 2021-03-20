@@ -52296,11 +52296,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         path: "/directors/:name",
         render: function render(_ref2) {
           var match = _ref2.match;
-          if (!movies) return _react.default.createElement("div", {
+          if (!movies.length) return _react.default.createElement("div", {
             className: "main-view"
           });
-          console.log(match.params.name);
-          console.log(movies);
           return _react.default.createElement(_directorView.DirectorView, {
             director: movies.find(function (m) {
               return m.Director.Name === match.params.name;
@@ -52311,7 +52309,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         path: "/genres/:name",
         render: function render(_ref3) {
           var match = _ref3.match;
-          if (!movies) return _react.default.createElement("div", {
+          if (!movies.length) return _react.default.createElement("div", {
             className: "main-view"
           });
           return _react.default.createElement(_genreView.GenreView, {
@@ -52424,7 +52422,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62525" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49777" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
