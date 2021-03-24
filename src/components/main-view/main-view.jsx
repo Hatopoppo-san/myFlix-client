@@ -11,8 +11,14 @@ import {
 } from "react-bootstrap";
 import "./main-view.scss";
 
+import { connect } from "react-redux";
+
 import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 
+//#0
+import { setMovies } from "../../actions/actions";
+
+import MoviesList from "../movies-list/movies-list";
 import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
@@ -25,25 +31,9 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
+      // movies: [],
       user: null,
     };
-  }
-
-  getMovies(token) {
-    axios
-      .get("https://my-flix-api-practice.herokuapp.com/movies", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   // One of the "hooks" available in a React Component
@@ -55,6 +45,20 @@ export class MainView extends React.Component {
       });
       this.getMovies(accessToken);
     }
+  }
+
+  getMovies(token) {
+    axios
+      .get("https://my-flix-api-practice.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.props.setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   // When a user successfully logs in, this function updates the `user` property in state to that *particular user*
@@ -77,7 +81,8 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
+    const { movies } = this.props;
+    let { user } = this.state;
     const username = localStorage.getItem("user");
 
     // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
@@ -130,13 +135,7 @@ export class MainView extends React.Component {
                       </Navbar>
                     </div>
                   </div>
-                  <Row className='movie-card-container justify-content-md-center'>
-                    {movies.map((m) => (
-                      <Col key={m._id} xs={4}>
-                        <MovieCard movie={m} />
-                      </Col>
-                    ))}
-                  </Row>
+                  <MoviesList movies={movies} />
                 </div>
               );
             }}
@@ -189,3 +188,11 @@ export class MainView extends React.Component {
     );
   }
 }
+
+//3
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+
+//4
+export default connect(mapStateToProps, { setMovies })(MainView);
