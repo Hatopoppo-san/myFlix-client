@@ -16,11 +16,10 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 
 //#0
-import { setMovies } from "../../actions/actions";
+import { setMovies, setIsLoggedIn } from "../../actions/actions";
 
 import MoviesList from "../movies-list/movies-list";
 import { LoginView } from "../login-view/login-view";
-import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { DirectorView } from "../director-view/director-view";
@@ -31,7 +30,6 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      // movies: [],
       user: null,
     };
   }
@@ -64,9 +62,10 @@ export class MainView extends React.Component {
   // When a user successfully logs in, this function updates the `user` property in state to that *particular user*
   onLoggedIn(authData) {
     console.log(authData);
-    this.setState({
-      user: authData.user.Username,
-    });
+    this.props.setIsLoggedIn(authData.user.username);
+    // this.setState({
+    //   user: authData.user.Username,
+    // });
 
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", authData.user.Username);

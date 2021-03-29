@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+
+import { connect } from "react-redux";
 import "./login-view.scss";
-import RegistrationView from "../registration-view/registration-view";
+import setIsLoggedIn from "../../actions/actions";
 
 export function LoginView(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,8 +40,8 @@ export function LoginView(props) {
             type='text'
             required
             placeholder='Username'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={props.username}
+            onChange={(e) => isUserLoggedIn.username(e.target.value)}
           />
         </Form.Group>
 
@@ -48,8 +50,8 @@ export function LoginView(props) {
             type='password'
             required
             placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={props.password}
+            onChange={(e) => isUserLoggedIn.password(e.target.value)}
           />
         </Form.Group>
         <div className='login-register-button'>
@@ -66,55 +68,11 @@ export function LoginView(props) {
   );
 }
 
-// class component to see the difference between class and function components.
-// import React from 'react'
+const mapStateToProps = (state) => {
+  return {
+    username: state.username,
+    password: state.password,
+  };
+};
 
-// export class LoginView extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       username: '',
-//       password: ''
-//     };
-
-//     this.onUsernameChange = this.onUsernameChange.bind(this);
-//     this.onPaswordChange = this.onPasswordChange.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//   }
-
-//   onUsernameChange(event) {
-//     this.setState({
-//       username: event.target.value
-//     });
-//   }
-
-//   onPasswordChange(event){
-//     this.setState({
-//       password: event.target.value
-//     });
-//   }
-
-//   handleSubmit() {
-//     const { username, password } = this.state;
-//     console.log(username, password);
-//     /* send a request to the server for authentication
-//     then call this.props.onLoggedIn(username) */
-//   }
-
-//   render() {
-//     return (
-//       <form>
-//         <label>
-//           Username:
-//           <input type="text" value={this.state.username} onChange={this.onUsernameChange } />
-//         </label>
-//         <label>
-//           Password:
-//           <input type="password" value={this.state.password} onChange={this.onPasswordChange} />
-//         </label>
-//         <button type="button" onClick={this.handleSubmit}>Submit</button>
-//       </form>
-//     );
-//   }
-// }
+export default connect(mapStateToProps, { setIsLoggedIn })(LoginView);
