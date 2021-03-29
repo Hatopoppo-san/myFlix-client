@@ -6,11 +6,11 @@ import axios from "axios";
 
 import { connect } from "react-redux";
 import "./login-view.scss";
-import setIsLoggedIn from "../../actions/actions";
+import userLogin from "../../actions/actions";
 
 export function LoginView(props) {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ export function LoginView(props) {
             required
             placeholder='Username'
             value={props.username}
-            onChange={(e) => isUserLoggedIn.username(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
 
@@ -51,7 +51,7 @@ export function LoginView(props) {
             required
             placeholder='Password'
             value={props.password}
-            onChange={(e) => isUserLoggedIn.password(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
         <div className='login-register-button'>
@@ -68,11 +68,11 @@ export function LoginView(props) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (state) => {
   return {
     username: state.username,
     password: state.password,
   };
 };
 
-export default connect(mapStateToProps, { setIsLoggedIn })(LoginView);
+export default connect(mapDispatchToProps, { userLogin })(LoginView);

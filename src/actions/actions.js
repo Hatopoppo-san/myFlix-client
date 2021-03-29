@@ -16,10 +16,9 @@ export function setFilter(value) {
   };
 }
 
-export function setIsLoggedIn(isUserLoggedIn) {
+export function userLogin(username, password) {
   return {
     type: SET_LOGIN_STATE,
-    isUserLoggedIn,
     username,
     password,
   };

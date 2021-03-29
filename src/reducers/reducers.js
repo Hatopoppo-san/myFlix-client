@@ -21,18 +21,14 @@ function movies(state = [], action) {
 }
 
 const initialState = {
-  isUserLoggedIn: false,
   username: "",
   password: "",
 };
 
-const setIsLoggedIn = (state = initialState, action) => {
+const userLogin = (state = initialState, action) => {
   switch (action.type) {
     case SET_LOGIN_STATE:
-      return {
-        isUserLoggedIn: true,
-      };
-
+      return action.value;
     default:
       return state;
   }
@@ -41,7 +37,7 @@ const setIsLoggedIn = (state = initialState, action) => {
 const moviesApp = combineReducers({
   visibilityFilter,
   movies,
-  setIsLoggedIn,
+  userLogin,
 });
 
 export default moviesApp;

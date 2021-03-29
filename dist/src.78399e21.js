@@ -53367,7 +53367,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setMovies = setMovies;
 exports.setFilter = setFilter;
-exports.setIsLoggedIn = setIsLoggedIn;
+exports.userLogin = userLogin;
 exports.SET_LOGIN_STATE = exports.SET_FILTER = exports.SET_MOVIES = void 0;
 var SET_MOVIES = "SET_MOVIES";
 exports.SET_MOVIES = SET_MOVIES;
@@ -53390,10 +53390,9 @@ function setFilter(value) {
   };
 }
 
-function setIsLoggedIn(isUserLoggedIn) {
+function userLogin(username, password) {
   return {
     type: SET_LOGIN_STATE,
-    isUserLoggedIn: isUserLoggedIn,
     username: username,
     password: password
   };
@@ -53616,10 +53615,29 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-// function component case :
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function LoginView(props) {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
+  var _useState = (0, _react.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      username = _useState2[0],
+      setUsername = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      setPassword = _useState4[1];
+
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     /* Send a request to the server for authentication */
@@ -53646,7 +53664,7 @@ function LoginView(props) {
     placeholder: "Username",
     value: props.username,
     onChange: function onChange(e) {
-      return isUserLoggedIn.username(e.target.value);
+      return setUsername(e.target.value);
     }
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formPassword"
@@ -53656,7 +53674,7 @@ function LoginView(props) {
     placeholder: "Password",
     value: props.password,
     onChange: function onChange(e) {
-      return isUserLoggedIn.password(e.target.value);
+      return setPassword(e.target.value);
     }
   })), _react.default.createElement("div", {
     className: "login-register-button"
@@ -53672,15 +53690,15 @@ function LoginView(props) {
   }, "New user"))));
 }
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapDispatchToProps = function mapDispatchToProps(state) {
   return {
     username: state.username,
     password: state.password
   };
 };
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, {
-  setIsLoggedIn: _actions.default
+var _default = (0, _reactRedux.connect)(mapDispatchToProps, {
+  userLogin: _actions.default
 })(LoginView);
 
 exports.default = _default;
@@ -54599,9 +54617,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MainView);
 
     _this = _super.call(this);
-    _this.state = {
-      user: null
-    };
+    _this.state = {};
     return _this;
   } // One of the "hooks" available in a React Component
 
@@ -54639,7 +54655,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "onLoggedIn",
     value: function onLoggedIn(authData) {
       console.log(authData);
-      this.props.setIsLoggedIn(authData.user.username); // this.setState({
+      this.props.userLogin(authData.user.username); // this.setState({
       //   user: authData.user.Username,
       // });
 
@@ -54661,7 +54677,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var movies = this.props.movies;
-      var user = this.state.user;
+      var user = this.props.user;
       var username = localStorage.getItem("user"); // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
       // Before the movies have been loaded
 
@@ -54830,20 +54846,17 @@ function movies() {
 }
 
 var initialState = {
-  isUserLoggedIn: false,
   username: "",
   password: ""
 };
 
-var setIsLoggedIn = function setIsLoggedIn() {
+var userLogin = function userLogin() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case _actions.SET_LOGIN_STATE:
-      return {
-        isUserLoggedIn: true
-      };
+      return action.value;
 
     default:
       return state;
@@ -54853,7 +54866,7 @@ var setIsLoggedIn = function setIsLoggedIn() {
 var moviesApp = (0, _redux.combineReducers)({
   visibilityFilter: visibilityFilter,
   movies: movies,
-  setIsLoggedIn: setIsLoggedIn
+  userLogin: userLogin
 });
 var _default = moviesApp;
 exports.default = _default;

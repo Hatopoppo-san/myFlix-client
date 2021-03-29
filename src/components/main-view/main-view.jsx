@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 
 //#0
-import { setMovies, setIsLoggedIn } from "../../actions/actions";
+import { setMovies, userLogin } from "../../actions/actions";
 
 import MoviesList from "../movies-list/movies-list";
 import { LoginView } from "../login-view/login-view";
@@ -29,9 +29,7 @@ import { ProfileView } from "../profile-view/profile-view";
 export class MainView extends React.Component {
   constructor() {
     super();
-    this.state = {
-      user: null,
-    };
+    this.state = {};
   }
 
   // One of the "hooks" available in a React Component
@@ -62,7 +60,7 @@ export class MainView extends React.Component {
   // When a user successfully logs in, this function updates the `user` property in state to that *particular user*
   onLoggedIn(authData) {
     console.log(authData);
-    this.props.setIsLoggedIn(authData.user.username);
+    this.props.userLogin(authData.user.username);
     // this.setState({
     //   user: authData.user.Username,
     // });
@@ -81,7 +79,7 @@ export class MainView extends React.Component {
 
   render() {
     const { movies } = this.props;
-    let { user } = this.state;
+    let { user } = this.props;
     const username = localStorage.getItem("user");
 
     // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
