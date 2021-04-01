@@ -6,19 +6,19 @@ import axios from "axios";
 
 import { connect } from "react-redux";
 import "./login-view.scss";
-import userLogin from "../../actions/actions";
+import { userLogin, userLogout } from "../../actions/actions";
 
 export function LoginView(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     /* Send a request to the server for authentication */
     axios
       .post("https://my-flix-api-practice.herokuapp.com/login", {
-        Username: username,
-        Password: password,
+        Username: props.username,
+        Password: props.password,
       })
       .then((response) => {
         const data = response.data;
@@ -41,7 +41,7 @@ export function LoginView(props) {
             required
             placeholder='Username'
             value={props.username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => userLogin(e.target.value)}
           />
         </Form.Group>
 
@@ -51,7 +51,7 @@ export function LoginView(props) {
             required
             placeholder='Password'
             value={props.password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => userLogin(e.target.value)}
           />
         </Form.Group>
         <div className='login-register-button'>
@@ -68,11 +68,16 @@ export function LoginView(props) {
   );
 }
 
-const mapDispatchToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     username: state.username,
     password: state.password,
   };
 };
 
-export default connect(mapDispatchToProps, { userLogin })(LoginView);
+const mapDispatchToProps = {
+  userLogin: userLogin,
+  userLogout: userLogout,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);

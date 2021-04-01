@@ -29,7 +29,9 @@ import { ProfileView } from "../profile-view/profile-view";
 export class MainView extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      user: null,
+    };
   }
 
   // One of the "hooks" available in a React Component
@@ -60,7 +62,7 @@ export class MainView extends React.Component {
   // When a user successfully logs in, this function updates the `user` property in state to that *particular user*
   onLoggedIn(authData) {
     console.log(authData);
-    this.props.userLogin(authData.user.username);
+    this.props.userLogin(authData);
     // this.setState({
     //   user: authData.user.Username,
     // });
@@ -79,7 +81,7 @@ export class MainView extends React.Component {
 
   render() {
     const { movies } = this.props;
-    let { user } = this.props;
+    let { user } = this.state;
     const username = localStorage.getItem("user");
 
     // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView

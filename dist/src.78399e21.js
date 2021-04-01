@@ -53367,14 +53367,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setMovies = setMovies;
 exports.setFilter = setFilter;
+exports.addProfile = addProfile;
 exports.userLogin = userLogin;
-exports.SET_LOGIN_STATE = exports.SET_FILTER = exports.SET_MOVIES = void 0;
+exports.updateProfile = updateProfile;
+exports.LOGIN = exports.UPDATE_PROFILE = exports.ADD_USER = exports.SET_FILTER = exports.SET_MOVIES = void 0;
 var SET_MOVIES = "SET_MOVIES";
 exports.SET_MOVIES = SET_MOVIES;
 var SET_FILTER = "SET_FILTER";
 exports.SET_FILTER = SET_FILTER;
-var SET_LOGIN_STATE = "SET_LOGIN_STATE";
-exports.SET_LOGIN_STATE = SET_LOGIN_STATE;
+var ADD_USER = "ADD_USER";
+exports.ADD_USER = ADD_USER;
+var UPDATE_PROFILE = "UPDATE_PROFILE";
+exports.UPDATE_PROFILE = UPDATE_PROFILE;
+var LOGIN = "LOGIN";
+exports.LOGIN = LOGIN;
 
 function setMovies(value) {
   return {
@@ -53390,11 +53396,30 @@ function setFilter(value) {
   };
 }
 
-function userLogin(username, password) {
+function addProfile(user) {
   return {
-    type: SET_LOGIN_STATE,
-    username: username,
-    password: password
+    type: ADD_USER,
+    payload: {
+      user: user
+    }
+  };
+}
+
+function userLogin(user) {
+  return {
+    type: LOGIN,
+    payload: {
+      user: user
+    }
+  };
+}
+
+function updateProfile(user) {
+  return {
+    type: UPDATE_PROFILE,
+    payload: {
+      user: user
+    }
   };
 }
 },{}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
@@ -54617,7 +54642,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MainView);
 
     _this = _super.call(this);
-    _this.state = {};
+    _this.state = {
+      user: null
+    };
     return _this;
   } // One of the "hooks" available in a React Component
 
@@ -54655,10 +54682,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "onLoggedIn",
     value: function onLoggedIn(authData) {
       console.log(authData);
-      this.props.userLogin(authData.user.username); // this.setState({
-      //   user: authData.user.Username,
-      // });
-
+      this.setState({
+        user: authData.user.Username
+      });
       localStorage.setItem("token", authData.token);
       localStorage.setItem("user", authData.user.Username);
       this.getMovies(authData.token);
@@ -54677,7 +54703,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var movies = this.props.movies;
-      var user = this.props.user;
+      var user = this.state.user;
       var username = localStorage.getItem("user"); // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
       // Before the movies have been loaded
 
@@ -54815,6 +54841,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _reactBootstrap = require("react-bootstrap");
+
 var _redux = require("redux");
 
 var _actions = require("../actions/actions");
@@ -54846,17 +54874,35 @@ function movies() {
 }
 
 var initialState = {
-  username: "",
-  password: ""
+  profile: {
+    username: "",
+    password: "",
+    email: "",
+    birthday: "",
+    favorites: []
+  }
 };
 
-var userLogin = function userLogin() {
+var userReducer = function userReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions.SET_LOGIN_STATE:
-      return action.value;
+    case _actions.LOGIN:
+      console.log("login", action.payload.user);
+      return {
+        profile: action.payload.user
+      };
+
+    case _actions.UPDATE_PROFILE:
+      return {
+        profile: action.payload.user
+      };
+
+    case _actions.ADD_USER:
+      return {
+        profile: action.payload.user
+      };
 
     default:
       return state;
@@ -54866,11 +54912,12 @@ var userLogin = function userLogin() {
 var moviesApp = (0, _redux.combineReducers)({
   visibilityFilter: visibilityFilter,
   movies: movies,
-  userLogin: userLogin
+  userReducer: userReducer,
+  user: profile
 });
 var _default = moviesApp;
 exports.default = _default;
-},{"redux":"../node_modules/redux/es/redux.js","../actions/actions":"actions/actions.js"}],"index.scss":[function(require,module,exports) {
+},{"react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","redux":"../node_modules/redux/es/redux.js","../actions/actions":"actions/actions.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
