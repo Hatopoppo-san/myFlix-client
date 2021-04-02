@@ -5,8 +5,8 @@ import {
   SET_MOVIES,
   UPDATE_PROFILE,
   DELETE_PROFILE,
-  LOGIN,
-  LOGOUT,
+  USER_LOGIN,
+  USER_LOGOUT,
   ADD_USER,
 } from "../actions/actions";
 
@@ -28,38 +28,57 @@ function movies(state = [], action) {
   }
 }
 
-const userReducer = (user = {}, action) => {
+const initialState = {
+  username: "",
+  password: "",
+  email: "",
+  birthday: "",
+  favoriteMovies: [],
+  isLoggedIn: false,
+};
+
+function userReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN:
+    case USER_LOGIN:
       return {
-        ...user,
+        ...state,
+        username: action.payload,
+        password: action.payload,
         isLoggedIn: true,
-        user: action.payload,
       };
 
-    case LOGOUT:
+    case USER_LOGOUT:
       return {
         user: null,
+        inLoggedIn: false,
       };
 
     case UPDATE_PROFILE:
       return {
-        ...user,
-        ...action.payload,
+        ...state,
+        username: action.payload,
+        password: action.payload,
+        email: action.payload,
+        birthday: action.payload,
       };
 
     case ADD_USER:
       return {
-        ...user,
-        ...action.payload,
+        ...state,
+        username: action.payload,
+        password: action.payload,
+        email: action.payload,
+        birthday: action.payload,
+        favoriteMovies: [],
       };
+
     case DELETE_PROFILE:
-      return {};
+      return null;
 
     default:
       return state;
   }
-};
+}
 
 const moviesApp = combineReducers({
   visibilityFilter,

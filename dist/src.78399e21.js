@@ -53367,10 +53367,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setMovies = setMovies;
 exports.setFilter = setFilter;
-exports.addProfile = addProfile;
-exports.userLogin = userLogin;
+exports.registerSuccess = registerSuccess;
+exports.login = login;
+exports.logout = logout;
 exports.updateProfile = updateProfile;
-exports.LOGIN = exports.UPDATE_PROFILE = exports.ADD_USER = exports.SET_FILTER = exports.SET_MOVIES = void 0;
+exports.deleteProfile = deleteProfile;
+exports.LOGOUT = exports.LOGIN = exports.DELETE_PROFILE = exports.UPDATE_PROFILE = exports.ADD_USER = exports.SET_FILTER = exports.SET_MOVIES = void 0;
 var SET_MOVIES = "SET_MOVIES";
 exports.SET_MOVIES = SET_MOVIES;
 var SET_FILTER = "SET_FILTER";
@@ -53379,8 +53381,12 @@ var ADD_USER = "ADD_USER";
 exports.ADD_USER = ADD_USER;
 var UPDATE_PROFILE = "UPDATE_PROFILE";
 exports.UPDATE_PROFILE = UPDATE_PROFILE;
+var DELETE_PROFILE = "DELETE_PROFILE";
+exports.DELETE_PROFILE = DELETE_PROFILE;
 var LOGIN = "LOGIN";
 exports.LOGIN = LOGIN;
+var LOGOUT = "LOGOUT";
+exports.LOGOUT = LOGOUT;
 
 function setMovies(value) {
   return {
@@ -53396,30 +53402,38 @@ function setFilter(value) {
   };
 }
 
-function addProfile(user) {
+function registerSuccess(user) {
   return {
-    type: ADD_USER,
+    type: REGISTER_SUCCESS,
     payload: {
       user: user
     }
   };
 }
 
-function userLogin(user) {
+function login(user) {
   return {
     type: LOGIN,
-    payload: {
-      user: user
-    }
+    payload: user
+  };
+}
+
+function logout() {
+  return {
+    type: LOGOUT
   };
 }
 
 function updateProfile(user) {
   return {
     type: UPDATE_PROFILE,
-    payload: {
-      user: user
-    }
+    payload: user
+  };
+}
+
+function deleteProfile() {
+  return {
+    type: DELETE_PROFILE
   };
 }
 },{}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
@@ -53632,7 +53646,7 @@ var _reactRedux = require("react-redux");
 
 require("./login-view.scss");
 
-var _actions = _interopRequireDefault(require("../../actions/actions"));
+var _actions = require("../../actions/actions");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53640,29 +53654,10 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
+// function component case :
 function LoginView(props) {
-  var _useState = (0, _react.useState)(""),
-      _useState2 = _slicedToArray(_useState, 2),
-      username = _useState2[0],
-      setUsername = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(""),
-      _useState4 = _slicedToArray(_useState3, 2),
-      password = _useState4[0],
-      setPassword = _useState4[1];
-
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     /* Send a request to the server for authentication */
@@ -53689,7 +53684,7 @@ function LoginView(props) {
     placeholder: "Username",
     value: props.username,
     onChange: function onChange(e) {
-      return setUsername(e.target.value);
+      return (0, _actions.login)(e.target.value);
     }
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formPassword"
@@ -53699,7 +53694,7 @@ function LoginView(props) {
     placeholder: "Password",
     value: props.password,
     onChange: function onChange(e) {
-      return setPassword(e.target.value);
+      return (0, _actions.login)(e.target.value);
     }
   })), _react.default.createElement("div", {
     className: "login-register-button"
@@ -53715,16 +53710,19 @@ function LoginView(props) {
   }, "New user"))));
 }
 
-var mapDispatchToProps = function mapDispatchToProps(state) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
     username: state.username,
     password: state.password
   };
 };
 
-var _default = (0, _reactRedux.connect)(mapDispatchToProps, {
-  userLogin: _actions.default
-})(LoginView);
+var mapDispatchToProps = {
+  login: _actions.login,
+  logout: _actions.logout
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginView);
 
 exports.default = _default;
 },{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js","./login-view.scss":"components/login-view/login-view.scss","../../actions/actions":"actions/actions.js"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
@@ -53857,6 +53855,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _reactRedux = _interopRequireDefault(require("react-redux"));
+
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
@@ -53960,78 +53960,14 @@ function RegistrationView(props) {
     variant: "primary",
     onClick: registerNewUser
   }, "Register")));
-} // export class RegistrationView extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       username: "",
-//       email: "",
-//       birthdate: "",
-//       password: "",
-//       password_confirmation: "",
-//       registrationErrors: "",
-//     };
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//     this.handleChange = this.handleChange.bind(this);
-//   }
-//   handleChange(e) {
-//     console.log("handle change", e);
-//   }
-//   handleSubmit(e) {
-//     console.log("form submitted");
-//     e.preventDefault();
-//   }
-//   render() {
-//     return (
-//       <div>
-//         <form onSubmit={this.handleSubmit}>
-//           <input
-//             type="text"
-//             name="username"
-//             placeholder="username"
-//             value={this.state.username}
-//             onChange={this.handleChange}
-//             required
-//           />
-//           <input
-//             type="email"
-//             name="email"
-//             placeholder="Email"
-//             value={this.state.email}
-//             onChange={this.handleChange}
-//             required
-//           />
-//           <input
-//             type="date"
-//             name="birthdate"
-//             placeholder="Birthdate"
-//             value={this.state.birthdate}
-//             onChange={this.handleChange}
-//             required
-//           />
-//           <input
-//             type="password"
-//             name="password"
-//             placeholder="Password"
-//             value={this.state.password}
-//             onChange={this.handleChange}
-//             required
-//           />
-//           <input
-//             type="password"
-//             name="password_confirmation"
-//             placeholder="Password confirmation"
-//             value={this.state.password_confirmation}
-//             onChange={this.handleChange}
-//             required
-//           />
-//           <button type="submit">Register</button>
-//         </form>
-//       </div>
-//     );
-//   }
-// }
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/director-view/director-view.scss":[function(require,module,exports) {
+}
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+};
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","./registration-view.scss":"components/registration-view/registration-view.scss"}],"components/director-view/director-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -54642,9 +54578,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MainView);
 
     _this = _super.call(this);
-    _this.state = {
-      user: null
-    };
+    _this.state = {};
     return _this;
   } // One of the "hooks" available in a React Component
 
@@ -54682,9 +54616,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "onLoggedIn",
     value: function onLoggedIn(authData) {
       console.log(authData);
-      this.setState({
-        user: authData.user.Username
-      });
+      this.props.login(authData); // this.setState({
+      //   user: authData.user.Username,
+      // });
+
       localStorage.setItem("token", authData.token);
       localStorage.setItem("user", authData.user.Username);
       this.getMovies(authData.token);
@@ -54703,7 +54638,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var movies = this.props.movies;
-      var user = this.state.user;
+      var user = this.props.user;
       var username = localStorage.getItem("user"); // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView
       // Before the movies have been loaded
 
@@ -54841,8 +54776,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _reactBootstrap = require("react-bootstrap");
-
 var _redux = require("redux");
 
 var _actions = require("../actions/actions");
@@ -54873,51 +54806,47 @@ function movies() {
   }
 }
 
-var initialState = {
-  profile: {
-    username: "",
-    password: "",
-    email: "",
-    birthday: "",
-    favorites: []
-  }
-};
-
-var userReducer = function userReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+function userReducer() {
+  var user = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case _actions.LOGIN:
-      console.log("login", action.payload.user);
       return {
-        profile: action.payload.user
+        user: action.payload
+      };
+
+    case _actions.LOGOUT:
+      return {
+        user: null
       };
 
     case _actions.UPDATE_PROFILE:
       return {
-        profile: action.payload.user
+        user: action.payload
       };
 
     case _actions.ADD_USER:
       return {
-        profile: action.payload.user
+        user: action.payload
       };
 
+    case _actions.DELETE_PROFILE:
+      return null;
+
     default:
-      return state;
+      return user;
   }
-};
+}
 
 var moviesApp = (0, _redux.combineReducers)({
   visibilityFilter: visibilityFilter,
   movies: movies,
-  userReducer: userReducer,
-  user: profile
+  userReducer: userReducer
 });
 var _default = moviesApp;
 exports.default = _default;
-},{"react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","redux":"../node_modules/redux/es/redux.js","../actions/actions":"actions/actions.js"}],"index.scss":[function(require,module,exports) {
+},{"redux":"../node_modules/redux/es/redux.js","../actions/actions":"actions/actions.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -55020,7 +54949,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49823" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53001" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -8,6 +8,11 @@ import { connect } from "react-redux";
 import "./login-view.scss";
 import { userLogin, userLogout } from "../../actions/actions";
 
+const mapStateToProps = (state) => {
+  const { userReducer } = props;
+  return { userReducer };
+};
+
 export function LoginView(props) {
   // const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
@@ -70,8 +75,8 @@ export function LoginView(props) {
 
 const mapStateToProps = (state) => {
   return {
-    username: state.username,
-    password: state.password,
+    username: username,
+    password: password,
   };
 };
 

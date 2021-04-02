@@ -1,11 +1,10 @@
 export const SET_MOVIES = "SET_MOVIES";
 export const SET_FILTER = "SET_FILTER";
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAIL = "REGISTER_FAIL";
+export const ADD_USER = "ADD_USER";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const DELETE_PROFILE = "DELETE_PROFILE";
-export const LOGIN_SUCCESS = "LOGIN";
-export const LOGOUT = "LOGOUT";
+export const USER_LOGIN = "USER_LOGIN";
+export const USER_LOGOUT = "USER_LOGOUT";
 
 export function setMovies(value) {
   return {
@@ -28,41 +27,28 @@ export function registerSuccess(user) {
   };
 }
 
-export function registerFail() {
+export function userLogin(user) {
   return {
-    type: REGISTER_FAIL,
+    type: USER_LOGIN,
+    payload: user,
   };
 }
 
-export function loginSuccess(user) {
+export function userLogout() {
   return {
-    type: LOGIN_SUCCESS,
-    payload: { user },
-  };
-}
-
-export function loginFail() {
-  return {
-    type: LOGIN_FAIL,
-  };
-}
-
-export function logout() {
-  return {
-    type: LOGOUT,
+    type: USER_LOGOUT,
   };
 }
 
 export function updateProfile(user) {
   return {
     type: UPDATE_PROFILE,
-    payload: { user },
+    payload: user,
   };
 }
 
-export function deleteProfile(user) {
+export function deleteProfile() {
   return {
     type: DELETE_PROFILE,
-    payload: { user },
   };
 }
