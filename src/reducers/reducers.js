@@ -3,12 +3,11 @@ import { combineReducers } from "redux";
 import {
   SET_FILTER,
   SET_MOVIES,
-  REGISTER_SUCCESS,
   UPDATE_PROFILE,
   DELETE_PROFILE,
-  LOGIN_SUCCESS,
+  LOGIN,
   LOGOUT,
-  REGISTER_FAIL,
+  ADD_USER,
 } from "../actions/actions";
 
 function visibilityFilter(state = "", action) {
@@ -29,66 +28,33 @@ function movies(state = [], action) {
   }
 }
 
-const user = JSON.parse(localStorage.getItem("user"));
-
-const initialState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
-
-const userReducer = (state = initialState, action) => {
+const userReducer = (user = {}, action) => {
   switch (action.type) {
-    case REGISTER_SUCCESS:
+    case LOGIN:
       return {
-        ...state,
-        isLoggedIn: false,
-      };
-    case REGISTER_FAIL:
-      return {
-        ...state,
-        isLoggedIn: false,
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
+        ...user,
         isLoggedIn: true,
-        user: payload.user,
+        user: action.payload,
       };
 
-    case LOGIN_FAIL:
+    case LOGOUT:
       return {
-        ...state,
-        isLoggedIn: false,
         user: null,
       };
-    // case UPDATE_PROFILE:
-    //   return {
-    //     ...state,
-    //     user: {
-    //       ...state.user,
-    //       username: action.payload,
-    //       password: action.payload,
-    //       email: action.payload,
-    //       birthday: action.payload,
-    //     },
-    //   };
 
-    // case ADD_USER:
-    //   return {
-    //     ...state,
-    //     user: {
-    //       ...state.user,
-    //       username: action.payload,
-    //       password: action.payload,
-    //       email: action.payload,
-    //       birthday: action.payload,
-    //     },
-    //   };
-    // case DELETE_USER:
-    //   const updatedArr = state.user.filter((user) => user !== action.payload);
-    //   return {
-    //     ...state,
-    //     updatedArr,
-    //   };
+    case UPDATE_PROFILE:
+      return {
+        ...user,
+        ...action.payload,
+      };
+
+    case ADD_USER:
+      return {
+        ...user,
+        ...action.payload,
+      };
+    case DELETE_PROFILE:
+      return {};
 
     default:
       return state;
