@@ -30,7 +30,6 @@ function movies(state = [], action) {
 
 const initialState = {
   username: "",
-  password: "",
   email: "",
   birthday: "",
   favoriteMovies: [],
@@ -43,21 +42,20 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         username: action.payload,
-        password: action.payload,
         isLoggedIn: true,
       };
 
     case USER_LOGOUT:
       return {
-        user: null,
-        inLoggedIn: false,
+        ...state,
+        username: "",
+        isLoggedIn: false,
       };
 
     case UPDATE_PROFILE:
       return {
         ...state,
         username: action.payload,
-        password: action.payload,
         email: action.payload,
         birthday: action.payload,
       };
@@ -66,14 +64,13 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         username: action.payload,
-        password: action.payload,
         email: action.payload,
         birthday: action.payload,
         favoriteMovies: [],
       };
 
     case DELETE_PROFILE:
-      return null;
+      return {};
 
     default:
       return state;

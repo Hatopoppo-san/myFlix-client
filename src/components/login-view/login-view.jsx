@@ -9,13 +9,14 @@ import "./login-view.scss";
 import { userLogin, userLogout } from "../../actions/actions";
 
 const mapStateToProps = (state) => {
-  const { userReducer } = props;
-  return { userReducer };
+  return {
+    user: state,
+  };
 };
 
 export function LoginView(props) {
   // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ export function LoginView(props) {
     axios
       .post("https://my-flix-api-practice.herokuapp.com/login", {
         Username: props.username,
-        Password: props.password,
+        Password: password,
       })
       .then((response) => {
         const data = response.data;
@@ -55,8 +56,8 @@ export function LoginView(props) {
             type='password'
             required
             placeholder='Password'
-            value={props.password}
-            onChange={(e) => userLogin(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
         <div className='login-register-button'>
@@ -72,13 +73,6 @@ export function LoginView(props) {
     </div>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    username: username,
-    password: password,
-  };
-};
 
 const mapDispatchToProps = {
   userLogin: userLogin,
