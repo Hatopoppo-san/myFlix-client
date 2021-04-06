@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 
 //#0
-import { setMovies, login } from "../../actions/actions";
+import { setMovies, userLogin } from "../../actions/actions";
 
 import MoviesList from "../movies-list/movies-list";
 import { LoginView } from "../login-view/login-view";
@@ -60,7 +60,7 @@ export class MainView extends React.Component {
   // When a user successfully logs in, this function updates the `user` property in state to that *particular user*
   onLoggedIn(authData) {
     console.log(authData);
-    this.props.login(authData);
+    this.props.userLogin(authData);
     // this.setState({
     //   user: authData.user.Username,
     // });

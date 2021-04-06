@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import { Field, reduxForm } from "redux-form";
 
 import { connect } from "react-redux";
 import "./login-view.scss";
@@ -16,7 +17,7 @@ const mapStateToProps = (state) => {
 
 export function LoginView(props) {
   // const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ export function LoginView(props) {
     axios
       .post("https://my-flix-api-practice.herokuapp.com/login", {
         Username: props.username,
-        Password: password,
+        Password: props.password,
       })
       .then((response) => {
         const data = response.data;
@@ -47,7 +48,7 @@ export function LoginView(props) {
             required
             placeholder='Username'
             value={props.username}
-            onChange={(e) => userLogin(e.target.value)}
+            onChange={(e) => userLogin(e.target.value.username)}
           />
         </Form.Group>
 
@@ -56,8 +57,8 @@ export function LoginView(props) {
             type='password'
             required
             placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={props.password}
+            onChange={(e) => userLogin(e.target.value.password)}
           />
         </Form.Group>
         <div className='login-register-button'>
@@ -76,7 +77,6 @@ export function LoginView(props) {
 
 const mapDispatchToProps = {
   userLogin: userLogin,
-  userLogout: userLogout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginView);

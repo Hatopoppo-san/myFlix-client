@@ -6,7 +6,6 @@ import {
   UPDATE_PROFILE,
   DELETE_PROFILE,
   USER_LOGIN,
-  USER_LOGOUT,
   ADD_USER,
 } from "../actions/actions";
 
@@ -30,43 +29,46 @@ function movies(state = [], action) {
 
 const initialState = {
   username: "",
+  password: "",
   email: "",
   birthday: "",
   favoriteMovies: [],
-  isLoggedIn: false,
 };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
     case USER_LOGIN:
-      return {
-        ...state,
+      let usernameAssign = Object.assign({
         username: action.payload,
-        isLoggedIn: true,
-      };
-
-    case USER_LOGOUT:
+        password: action.payload,
+        state,
+      });
       return {
-        ...state,
-        username: "",
-        isLoggedIn: false,
+        usernameAssign,
       };
 
     case UPDATE_PROFILE:
-      return {
-        ...state,
+      let profileAssign = Object.assign({
         username: action.payload,
         email: action.payload,
         birthday: action.payload,
+        state,
+      });
+      return {
+        profileAssign,
       };
 
     case ADD_USER:
-      return {
-        ...state,
+      let addUserAssign = Object.assign({
         username: action.payload,
+        password: action.payload,
         email: action.payload,
         birthday: action.payload,
         favoriteMovies: [],
+        state,
+      });
+      return {
+        addUserAssign,
       };
 
     case DELETE_PROFILE:

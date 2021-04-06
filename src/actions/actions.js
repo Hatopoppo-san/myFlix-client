@@ -34,12 +34,6 @@ export function userLogin(user) {
   };
 }
 
-export function userLogout() {
-  return {
-    type: USER_LOGOUT,
-  };
-}
-
 export function updateProfile(user) {
   return {
     type: UPDATE_PROFILE,
