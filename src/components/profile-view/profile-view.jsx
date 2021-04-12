@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Form, Tab, Tabs, Container, Card } from "react-bootstrap/";
 import "./profile-view.scss";
 
-export class ProfileView extends React.Component {
+class ProfileView extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,6 +39,8 @@ export class ProfileView extends React.Component {
       })
       .then((response) => {
         // Assign the result to the state
+        // change to use Redux store -
+        // action, reducer, constant - setUser
         this.setState({
           Username: response.data.Username,
           Password: response.data.Password,
@@ -98,7 +100,7 @@ export class ProfileView extends React.Component {
       .put(
         `https://my-flix-api-practice.herokuapp.com/users/${username}`,
         {
-          Username: newUsername ? newUsername : this.state.Username,
+          Username: newUsername ? newUsername : this.state.Username, // this.props.Username
           Password: this.Password,
           Email: newEmail ? newEmail : this.state.Email,
           Birthday: newBirthday ? newBirthday : this.state.Birthday,
@@ -107,7 +109,7 @@ export class ProfileView extends React.Component {
       )
       .then((response) => {
         alert("Saved Changes");
-        this.setState({
+        this.setState({ // everywhere it says state here, use redux
           Username: response.data.Username,
           Password: response.data.Password,
           Email: response.data.Email,
@@ -300,3 +302,5 @@ export class ProfileView extends React.Component {
     );
   }
 }
+
+export default ProfileView;
