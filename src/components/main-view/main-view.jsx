@@ -12,23 +12,19 @@ import {
   Col,
 } from "react-bootstrap";
 import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 import { LoginView } from "../login-view/login-view";
-import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import ProfileView from "../profile-view/profile-view";
+import MoviesList from "../movies-list/movies-list";
 
-import {
-  setMovies,
-  setUsername
-} from '../../actions';
+import { setMovies, setUsername } from "../../actions";
 
 class MainView extends React.Component {
-
   getMovies(token) {
     axios
       .get("https://my-flix-api-practice.herokuapp.com/movies", {
@@ -88,7 +84,9 @@ class MainView extends React.Component {
                   <div id='login'>
                     <h1 id='main-title'>MyFlixDB</h1>
                     <h5>Your personal movie database</h5>
-                    <LoginView onLoggedIn={(authData) => this.onLoggedIn(authData)} />
+                    <LoginView
+                      onLoggedIn={(authData) => this.onLoggedIn(authData)}
+                    />
                   </div>
                 );
               return (
@@ -122,13 +120,7 @@ class MainView extends React.Component {
                       </Navbar>
                     </div>
                   </div>
-                  <Row className='movie-card-container justify-content-md-center'>
-                    {movies.map((m) => (
-                      <Col key={m._id} xs={4}>
-                        <MovieCard movie={m} />
-                      </Col>
-                    ))}
-                  </Row>
+                  <MoviesList movies={movies} />
                 </div>
               );
             }}
@@ -184,10 +176,10 @@ class MainView extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     movies: state.movies,
-    username: state.username
+    username: state.username,
   };
 };
 
