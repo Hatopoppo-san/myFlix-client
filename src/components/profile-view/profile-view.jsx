@@ -1,27 +1,31 @@
+import "./profile-view.scss";
+
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button, Form, Tab, Tabs, Container, Card } from "react-bootstrap/";
-import "./profile-view.scss";
+import { connect } from "react-redux";
+
+import { setUser } from "../../actions";
 
 class ProfileView extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    (this.Username = null),
-      (this.Password = null),
-      (this.Email = null),
-      (this.Birthday = null);
+  //   (this.Username = null),
+  //     (this.Password = null),
+  //     (this.Email = null),
+  //     (this.Birthday = null);
 
-    this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
-      FavoriteMovies: [],
-      validated: null,
-    };
-  }
+  //   this.state = {
+  //     Username: null,
+  //     Password: null,
+  //     Email: null,
+  //     Birthday: null,
+  //     FavoriteMovies: [],
+  //     validated: null,
+  //   };
+  // }
 
   componentDidMount() {
     let accessToken = localStorage.getItem("token");
@@ -41,13 +45,22 @@ class ProfileView extends React.Component {
         // Assign the result to the state
         // change to use Redux store -
         // action, reducer, constant - setUser
-        this.setState({
+        console.log(response.data);
+        this.props.setUser({
           Username: response.data.Username,
           Password: response.data.Password,
           Email: response.data.Email,
           Birthday: response.data.Birthday,
           FavoriteMovies: response.data.FavoriteMovies,
         });
+        console.log(Username);
+        // this.setState({
+        //   Username: response.data.Username,
+        //   Password: response.data.Password,
+        //   Email: response.data.Email,
+        //   Birthday: response.data.Birthday,
+        //   FavoriteMovies: response.data.FavoriteMovies,
+        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -75,8 +88,6 @@ class ProfileView extends React.Component {
         console.log(err);
       });
   }
-
-  //worked until here
 
   handleUpdate = (e, newUsername, newPassword, newEmail, newBirthday) => {
     this.setState({
@@ -109,7 +120,8 @@ class ProfileView extends React.Component {
       )
       .then((response) => {
         alert("Saved Changes");
-        this.setState({ // everywhere it says state here, use redux
+        this.setState({
+          // everywhere it says state here, use redux
           Username: response.data.Username,
           Password: response.data.Password,
           Email: response.data.Email,
@@ -169,7 +181,7 @@ class ProfileView extends React.Component {
       Birthday,
       FavoriteMovies,
       validated,
-    } = this.state;
+    } = this.props;
     const { movies } = this.props;
 
     return (
@@ -303,4 +315,10 @@ class ProfileView extends React.Component {
   }
 }
 
-export default ProfileView;
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile,
+  };
+};
+
+export default connect(mapStateToProps, { setUser })(ProfileView);

@@ -2,15 +2,7 @@ import "./main-view.scss";
 
 import React from "react";
 import axios from "axios";
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
