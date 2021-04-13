@@ -18,6 +18,10 @@ div {
   vertical-align: middle;
 }
 
+.container {
+  max-width: 1000px;
+}
+
 .nav-container {
   position: fixed;
   top: 0;
@@ -34,6 +38,21 @@ div {
   background-color: #e7717d;
   top: 0;
   z-index: 9;
+  display: flex;
+}
+
+.nav-button {
+  background: gray;
+  color: beige;
+  border: 1px solid darkgray;
+  padding: 0px 5px;
+}
+
+.nav-button:hover {
+  background: beige;
+  color: gray;
+  border: 1px solid #ffe4c4; // Bisque
+  padding: 0px 5px;
 }
 
 #main-logo {

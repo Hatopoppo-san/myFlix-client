@@ -92,33 +92,20 @@ class MainView extends React.Component {
               return (
                 <div>
                   <div className='nav-container'>
-                    <div className='nav-inside-container'>
-                      <Navbar className='mainNav' variant='light' expand='lg'>
-                        <Navbar.Brand id='main-logo' href='/'>
-                          MyFlix
-                        </Navbar.Brand>
-                        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-                        <Navbar.Collapse id='basic-navbar-nav'>
-                          <Nav className='mr-auto'>
-                            <Nav.Link href='/'>Home</Nav.Link>
-                            <Nav.Link href={`/users/${username}`}>
-                              Mypage
-                            </Nav.Link>
-                            <Button onClick={() => this.logoutUser()}>
-                              log out
-                            </Button>
-                          </Nav>
-                          <Form inline>
-                            <FormControl
-                              type='text'
-                              placeholder='Search'
-                              className='mr-sm-2'
-                            />
-                            <Button variant='outline-success'>Search</Button>
-                          </Form>
-                        </Navbar.Collapse>
-                      </Navbar>
-                    </div>
+                    <Navbar className='mainNav' variant='light'>
+                      <Navbar.Brand id='main-logo' href='/'>
+                        MyFlix
+                      </Navbar.Brand>
+                      <Nav className='mr-auto'>
+                        <Nav.Link href='/'>Home</Nav.Link>
+                        <Nav.Link href={`/users/${username}`}>Mypage</Nav.Link>
+                        <Button
+                          className='nav-button'
+                          onClick={() => this.logoutUser()}>
+                          log out
+                        </Button>
+                      </Nav>
+                    </Navbar>
                   </div>
                   <MoviesList movies={movies} />
                 </div>
