@@ -29,25 +29,10 @@ function username(state = null, action) {
   }
 }
 
-const currentState = {
-  Username: null,
-  Password: null,
-  Email: null,
-  Birthday: null,
-  FavoriteMovies: [],
-};
-
-function profile(state = currentState, action) {
+function profile(state = null, action) {
   switch (action.type) {
     case SET_USER:
-      return {
-        ...state,
-        Username: action.value.Username,
-        Password: action.value.Password,
-        Email: action.value.Email,
-        Birthday: action.value.Birthday,
-        FavoriteMovies: action.value.FavoriteMovies,
-      };
+      return action.value;
     default:
       return state;
   }

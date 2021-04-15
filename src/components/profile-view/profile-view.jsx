@@ -8,6 +8,17 @@ import { connect } from "react-redux";
 
 import { setUser } from "../../actions";
 
+const mapStateToProps = (state) => {
+  const { Username, Password, Email, Birthday, FavoriteMovies } = state;
+  return {
+    Username,
+    Password,
+    Email,
+    Birthday,
+    FavoriteMovies,
+  };
+};
+
 class ProfileView extends React.Component {
   // constructor(props) {
   //   super(props);
@@ -42,10 +53,10 @@ class ProfileView extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
+        console.log(response.data);
         // Assign the result to the state
         // change to use Redux store -
         // action, reducer, constant - setUser
-        console.log(response.data);
         this.props.setUser({
           Username: response.data.Username,
           Password: response.data.Password,
@@ -53,14 +64,6 @@ class ProfileView extends React.Component {
           Birthday: response.data.Birthday,
           FavoriteMovies: response.data.FavoriteMovies,
         });
-        console.log(Username);
-        // this.setState({
-        //   Username: response.data.Username,
-        //   Password: response.data.Password,
-        //   Email: response.data.Email,
-        //   Birthday: response.data.Birthday,
-        //   FavoriteMovies: response.data.FavoriteMovies,
-        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -174,19 +177,12 @@ class ProfileView extends React.Component {
   }
 
   render() {
-    const {
-      Username,
-      Password,
-      Email,
-      Birthday,
-      FavoriteMovies,
-      validated,
-    } = this.props;
+    const { Username, Password, Email, Birthday, FavoriteMovies } = this.props;
     const { movies } = this.props;
 
     return (
       <Container className='profile-view'>
-        <Tabs defaultActiveKey='profile' className='profile-tabs'>
+        {/* <Tabs defaultActiveKey='profile' className='profile-tabs'>
           <Tab eventKey='profile' title='Profile'>
             <h1>My Profile</h1>
             <Card className='profile-card'>
@@ -309,16 +305,10 @@ class ProfileView extends React.Component {
               </Card.Body>
             </Card>
           </Tab>
-        </Tabs>
+        </Tabs> */}
       </Container>
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    profile: state.profile,
-  };
-};
 
 export default connect(mapStateToProps, { setUser })(ProfileView);
