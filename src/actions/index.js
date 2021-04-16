@@ -1,4 +1,11 @@
-import { SET_MOVIES, SET_FILTER, SET_USERNAME, SET_USER } from "../constants";
+import {
+  SET_MOVIES,
+  SET_FILTER,
+  SET_USERNAME,
+  SET_USER,
+  SET_VALIDATED,
+  SET_CHANGED_USER,
+} from "../constants";
 
 export function setMovies(value) {
   return { type: SET_MOVIES, value };
@@ -14,4 +21,8 @@ export function setUsername(value) {
 
 export function setUser(value) {
   return { type: SET_USER, value };
+}
+
+export function setValidated(value) {
+  return { type: SET_VALIDATED, value };
 }

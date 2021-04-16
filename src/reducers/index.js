@@ -1,6 +1,13 @@
 import { combineReducers } from "redux";
 
-import { SET_FILTER, SET_MOVIES, SET_USERNAME, SET_USER } from "../constants";
+import {
+  SET_FILTER,
+  SET_MOVIES,
+  SET_USERNAME,
+  SET_USER,
+  SET_VALIDATED,
+  SET_CHANGED_USER,
+} from "../constants";
 
 function visibilityFilter(state = "", action) {
   switch (action.type) {
@@ -46,11 +53,21 @@ function profile(state = initialState, action) {
   }
 }
 
+function isValidated(state = false, action) {
+  switch (action.type) {
+    case SET_VALIDATED:
+      return action.value;
+    default:
+      return state;
+  }
+}
+
 const appReducers = combineReducers({
   visibilityFilter,
   movies,
   username,
   profile,
+  isValidated,
 });
 
 export default appReducers;
