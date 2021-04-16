@@ -9,13 +9,8 @@ import { connect } from "react-redux";
 import { setUser } from "../../actions";
 
 const mapStateToProps = (state) => {
-  const { Username, Password, Email, Birthday, FavoriteMovies } = state;
   return {
-    Username,
-    Password,
-    Email,
-    Birthday,
-    FavoriteMovies,
+    profile: state.profile,
   };
 };
 
@@ -57,13 +52,7 @@ class ProfileView extends React.Component {
         // Assign the result to the state
         // change to use Redux store -
         // action, reducer, constant - setUser
-        this.props.setUser({
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-          FavoriteMovies: response.data.FavoriteMovies,
-        });
+        this.props.setUser(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -177,11 +166,14 @@ class ProfileView extends React.Component {
   }
 
   render() {
-    const { Username, Password, Email, Birthday, FavoriteMovies } = this.props;
+    // const { Username, Password, Email, Birthday, FavoriteMovies } = this.props;
+    const { profile } = this.props;
     const { movies } = this.props;
+    console.log(this.props.Username);
 
     return (
       <Container className='profile-view'>
+        <h1>{profile.Username}</h1>
         {/* <Tabs defaultActiveKey='profile' className='profile-tabs'>
           <Tab eventKey='profile' title='Profile'>
             <h1>My Profile</h1>

@@ -29,7 +29,15 @@ function username(state = null, action) {
   }
 }
 
-function profile(state = null, action) {
+const initialState = {
+  Username: "",
+  Password: "",
+  Email: "",
+  Birthday: "",
+  FavoriteMovies: [],
+};
+
+function profile(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return action.value;
