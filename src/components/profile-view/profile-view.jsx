@@ -167,14 +167,21 @@ class ProfileView extends React.Component {
 
   render() {
     // const { Username, Password, Email, Birthday, FavoriteMovies } = this.props;
-    const { profile } = this.props;
+    const {
+      Username,
+      Password,
+      Birthday,
+      Email,
+      FavoriteMovies,
+      validated,
+    } = this.props.profile;
     const { movies } = this.props;
-    console.log(this.props.Username);
+    console.log(Username);
 
     return (
       <Container className='profile-view'>
-        <h1>{profile.Username}</h1>
-        {/* <Tabs defaultActiveKey='profile' className='profile-tabs'>
+        <h1>{Username}</h1>
+        <Tabs defaultActiveKey='profile' className='profile-tabs'>
           <Tab eventKey='profile' title='Profile'>
             <h1>My Profile</h1>
             <Card className='profile-card'>
@@ -297,7 +304,7 @@ class ProfileView extends React.Component {
               </Card.Body>
             </Card>
           </Tab>
-        </Tabs> */}
+        </Tabs>
       </Container>
     );
   }
