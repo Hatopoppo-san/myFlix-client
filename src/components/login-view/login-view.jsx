@@ -55,10 +55,9 @@ export function LoginView(props) {
           <Button variant='primary' type='submit' onClick={handleSubmit}>
             Login
           </Button>
-          <p className='or'>or</p>
-          <Button variant='primary' href='/register'>
-            New user
-          </Button>
+          <p>
+            Not a user? You can register <a href='/register'>Here</a>
+          </p>
         </div>
       </Form>
     </div>
