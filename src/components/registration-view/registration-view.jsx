@@ -1,23 +1,32 @@
+import "./registration-view.scss";
+
 import React, { useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import "./registration-view.scss";
+import { connect } from "react-redux";
 
-export function RegistrationView(props) {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
+import { setNewUsername, setNewBirthday, setNewEmail } from "../../actions";
+
+const mapStateToProps = (state) => {
+  return {
+    username: state.newUsername,
+    birthday: state.newBirthday,
+    email: state.newEmail,
+  };
+};
+
+function RegistrationView(props) {
   const [password, setPassword] = useState("");
 
   const registerNewUser = (e) => {
     e.preventDefault();
     axios
       .post("https://my-flix-api-practice.herokuapp.com/users", {
-        Username: username,
+        Username: props.username,
         Password: password,
-        Email: email,
-        Birthday: birthday,
+        Email: props.email,
+        Birthday: props.birthday,
       })
       .then((response) => {
         const data = response.data;
@@ -37,8 +46,8 @@ export function RegistrationView(props) {
           <Form.Label>Username: </Form.Label>
           <Form.Control
             type='text'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={props.username}
+            onChange={(e) => props.setNewUsername(e.target.value)}
             required
           />
         </Form.Group>
@@ -56,8 +65,8 @@ export function RegistrationView(props) {
           <Form.Label>Email: </Form.Label>
           <Form.Control
             type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={props.email}
+            onChange={(e) => props.setNewEmail(e.target.value)}
             required
           />
         </Form.Group>
@@ -66,8 +75,8 @@ export function RegistrationView(props) {
           <Form.Label>Birthday: </Form.Label>
           <Form.Control
             type='date'
-            value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
+            value={props.birthday}
+            onChange={(e) => props.setNewBirthday(e.target.value)}
             required
           />
         </Form.Group>
@@ -78,3 +87,9 @@ export function RegistrationView(props) {
     </div>
   );
 }
+
+export default connect(mapStateToProps, {
+  setNewUsername,
+  setNewBirthday,
+  setNewEmail,
+})(RegistrationView);

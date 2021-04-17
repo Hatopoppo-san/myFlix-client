@@ -6,7 +6,9 @@ import {
   SET_USERNAME,
   SET_USER,
   SET_VALIDATED,
-  SET_CHANGED_USER,
+  SET_NEW_USERNAME,
+  SET_NEW_EMAIL,
+  SET_NEW_BIRTHDAY,
 } from "../constants";
 
 function visibilityFilter(state = "", action) {
@@ -62,12 +64,42 @@ function isValidated(state = false, action) {
   }
 }
 
+function newUsername(state = "", action) {
+  switch (action.type) {
+    case SET_NEW_USERNAME:
+      return action.value;
+    default:
+      return state;
+  }
+}
+
+function newEmail(state = "", action) {
+  switch (action.type) {
+    case SET_NEW_EMAIL:
+      return action.value;
+    default:
+      return state;
+  }
+}
+
+function newBirthday(state = "", action) {
+  switch (action.type) {
+    case SET_NEW_BIRTHDAY:
+      return action.value;
+    default:
+      return state;
+  }
+}
+
 const appReducers = combineReducers({
   visibilityFilter,
   movies,
   username,
   profile,
   isValidated,
+  newUsername,
+  newEmail,
+  newBirthday,
 });
 
 export default appReducers;

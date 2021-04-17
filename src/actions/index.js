@@ -4,7 +4,9 @@ import {
   SET_USERNAME,
   SET_USER,
   SET_VALIDATED,
-  SET_CHANGED_USER,
+  SET_NEW_USERNAME,
+  SET_NEW_EMAIL,
+  SET_NEW_BIRTHDAY,
 } from "../constants";
 
 export function setMovies(value) {
@@ -25,4 +27,16 @@ export function setUser(value) {
 
 export function setValidated(value) {
   return { type: SET_VALIDATED, value };
+}
+
+export function setNewUsername(value) {
+  return { type: SET_NEW_USERNAME, value };
+}
+
+export function setNewEmail(value) {
+  return { type: SET_NEW_EMAIL, value };
+}
+
+export function setNewBirthday(value) {
+  return { type: SET_NEW_BIRTHDAY, value };
 }
