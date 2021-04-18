@@ -9,12 +9,12 @@
   }
 }
 
-.login-register-button{
-  display: flex;
-  justify-content: space-between;
+.login-register-button Button {
   max-height: 40px;
+  width: 100%;
 }
 
-.or{
+.login-register-button p {
   text-align: center;
+  margin-top: 20px;
 }

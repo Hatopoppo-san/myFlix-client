@@ -1,23 +1,32 @@
+import "./registration-view.scss";
+
 import React, { useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import "./registration-view.scss";
+import { connect } from "react-redux";
 
-export function RegistrationView(props) {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
+import { setNewUsername, setNewBirthday, setNewEmail } from "../../actions";
+
+const mapStateToProps = (state) => {
+  return {
+    username: state.newUsername,
+    birthday: state.newBirthday,
+    email: state.newEmail,
+  };
+};
+
+function RegistrationView(props) {
   const [password, setPassword] = useState("");
 
   const registerNewUser = (e) => {
     e.preventDefault();
     axios
       .post("https://my-flix-api-practice.herokuapp.com/users", {
-        Username: username,
+        Username: props.username,
         Password: password,
-        Email: email,
-        Birthday: birthday,
+        Email: props.email,
+        Birthday: props.birthday,
       })
       .then((response) => {
         const data = response.data;
@@ -33,128 +42,54 @@ export function RegistrationView(props) {
   return (
     <div>
       <Form>
-        <Form.Group controlId="FormNewUsername">
+        <Form.Group controlId='FormNewUsername'>
           <Form.Label>Username: </Form.Label>
           <Form.Control
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type='text'
+            value={props.username}
+            onChange={(e) => props.setNewUsername(e.target.value)}
             required
           />
         </Form.Group>
-        <Form.Group controlId="FormNewUserPassword">
+        <Form.Group controlId='FormNewUserPassword'>
           <Form.Label>Password: </Form.Label>
           <Form.Control
-            type="password"
+            type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </Form.Group>
 
-        <Form.Group controlId="FormNewEmail">
+        <Form.Group controlId='FormNewEmail'>
           <Form.Label>Email: </Form.Label>
           <Form.Control
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type='email'
+            value={props.email}
+            onChange={(e) => props.setNewEmail(e.target.value)}
             required
           />
         </Form.Group>
 
-        <Form.Group controlId="FormNewBirthdate">
+        <Form.Group controlId='FormNewBirthdate'>
           <Form.Label>Birthday: </Form.Label>
           <Form.Control
-            type="date"
-            value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
+            type='date'
+            value={props.birthday}
+            onChange={(e) => props.setNewBirthday(e.target.value)}
             required
           />
         </Form.Group>
-        <Button type="submit" variant="primary" onClick={registerNewUser}>
+        <Button type='submit' variant='primary' onClick={registerNewUser}>
           Register
         </Button>
       </Form>
     </div>
   );
 }
-// export class RegistrationView extends React.Component {
-//   constructor(props) {
-//     super(props);
 
-//     this.state = {
-//       username: "",
-//       email: "",
-//       birthdate: "",
-//       password: "",
-//       password_confirmation: "",
-//       registrationErrors: "",
-//     };
-
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//     this.handleChange = this.handleChange.bind(this);
-//   }
-
-//   handleChange(e) {
-//     console.log("handle change", e);
-//   }
-
-//   handleSubmit(e) {
-//     console.log("form submitted");
-//     e.preventDefault();
-//   }
-//   render() {
-//     return (
-//       <div>
-//         <form onSubmit={this.handleSubmit}>
-//           <input
-//             type="text"
-//             name="username"
-//             placeholder="username"
-//             value={this.state.username}
-//             onChange={this.handleChange}
-//             required
-//           />
-
-//           <input
-//             type="email"
-//             name="email"
-//             placeholder="Email"
-//             value={this.state.email}
-//             onChange={this.handleChange}
-//             required
-//           />
-
-//           <input
-//             type="date"
-//             name="birthdate"
-//             placeholder="Birthdate"
-//             value={this.state.birthdate}
-//             onChange={this.handleChange}
-//             required
-//           />
-
-//           <input
-//             type="password"
-//             name="password"
-//             placeholder="Password"
-//             value={this.state.password}
-//             onChange={this.handleChange}
-//             required
-//           />
-
-//           <input
-//             type="password"
-//             name="password_confirmation"
-//             placeholder="Password confirmation"
-//             value={this.state.password_confirmation}
-//             onChange={this.handleChange}
-//             required
-//           />
-
-//           <button type="submit">Register</button>
-//         </form>
-//       </div>
-//     );
-//   }
-// }
+export default connect(mapStateToProps, {
+  setNewUsername,
+  setNewBirthday,
+  setNewEmail,
+})(RegistrationView);

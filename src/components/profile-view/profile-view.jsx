@@ -1,27 +1,39 @@
+import "./profile-view.scss";
+
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button, Form, Tab, Tabs, Container, Card } from "react-bootstrap/";
-import "./profile-view.scss";
+import { connect } from "react-redux";
 
-export class ProfileView extends React.Component {
-  constructor(props) {
-    super(props);
+import { setUser, setValidated } from "../../actions";
 
-    (this.Username = null),
-      (this.Password = null),
-      (this.Email = null),
-      (this.Birthday = null);
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile,
+    isValidated: state.isValidated,
+    changedProfile: state.changedProfile,
+  };
+};
 
-    this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
-      FavoriteMovies: [],
-      validated: null,
-    };
-  }
+class ProfileView extends React.Component {
+  // constructor(props) {
+  //   super(props);
+
+  //   (this.Username = null),
+  //     (this.Password = null),
+  //     (this.Email = null),
+  //     (this.Birthday = null);
+
+  //   this.state = {
+  //     Username: null,
+  //     Password: null,
+  //     Email: null,
+  //     Birthday: null,
+  //     FavoriteMovies: [],
+  //     validated: null,
+  //   };
+  // }
 
   componentDidMount() {
     let accessToken = localStorage.getItem("token");
@@ -38,14 +50,11 @@ export class ProfileView extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
+        console.log(response.data);
         // Assign the result to the state
-        this.setState({
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-          FavoriteMovies: response.data.FavoriteMovies,
-        });
+        // change to use Redux store -
+        // action, reducer, constant - setUser
+        this.props.setUser(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -74,17 +83,15 @@ export class ProfileView extends React.Component {
       });
   }
 
-  //worked until here
-
   handleUpdate = (e, newUsername, newPassword, newEmail, newBirthday) => {
-    this.setState({
+    this.props.setValidated({
       validated: null,
     });
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
-      this.setState({
+      this.props.setValidated({
         validated: true,
       });
       return;
@@ -98,22 +105,17 @@ export class ProfileView extends React.Component {
       .put(
         `https://my-flix-api-practice.herokuapp.com/users/${username}`,
         {
-          Username: newUsername ? newUsername : this.state.Username,
+          Username: newUsername ? newUsername : this.props.profile.Username, // this.props.Username
           Password: this.Password,
-          Email: newEmail ? newEmail : this.state.Email,
-          Birthday: newBirthday ? newBirthday : this.state.Birthday,
+          Email: newEmail ? newEmail : this.props.profile.Email,
+          Birthday: newBirthday ? newBirthday : this.props.profile.Birthday,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
         alert("Saved Changes");
-        this.setState({
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-        });
-        localStorage.setItem("user", this.state.Username);
+        this.props.setUser(response.data);
+        localStorage.setItem("user", this.props.profile.Username);
         window.open(`/users/${username}`, "_self");
       })
       .catch((error) => {
@@ -160,14 +162,15 @@ export class ProfileView extends React.Component {
   }
 
   render() {
+    // const { Username, Password, Email, Birthday, FavoriteMovies } = this.props;
     const {
       Username,
       Password,
-      Email,
       Birthday,
+      Email,
       FavoriteMovies,
-      validated,
-    } = this.state;
+    } = this.props.profile;
+    const { validated } = this.props.isValidated;
     const { movies } = this.props;
 
     return (
@@ -300,3 +303,5 @@ export class ProfileView extends React.Component {
     );
   }
 }
+
+export default connect(mapStateToProps, { setUser, setValidated })(ProfileView);
