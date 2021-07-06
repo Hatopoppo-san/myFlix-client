@@ -45,7 +45,7 @@ http://localhost:1234/
    * Allows new users to create an user account
    * Allows existing users to update their user info or to delete their account
    * Allows existing users to add or remove movies to/from their list of favorites
-For more information about each endpoint of the REST API, see documentation.html or [here](https://my-flix-api-practice.herokuapp.com/documentation.html)
+For more information about each endpoint of the REST API, see documentation.html or [my heroku](https://my-flix-api-practice.herokuapp.com/documentation.html)
 
 
 
