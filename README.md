@@ -14,7 +14,11 @@ You can check server side code [here](https://github.com/imatsuhira/movie_api)
    * React-Router-Dom
 
 
-![myFlix](https://user-images.githubusercontent.com/73891874/124602026-bdf75480-de68-11eb-8172-0abc4bfbe1b7.gif)
+
+https://user-images.githubusercontent.com/73891874/124606726-72937500-de6d-11eb-8208-14502592bc2a.mov
+
+
+
 
 
 ## Quick Start 🚀
