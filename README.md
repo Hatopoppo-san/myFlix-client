@@ -13,6 +13,10 @@ You can check server side code [here](https://github.com/imatsuhira/movie_api)
    * Sass,
    * React-Router-Dom
 
+
+![myFlix](https://user-images.githubusercontent.com/73891874/124602026-bdf75480-de68-11eb-8172-0abc4bfbe1b7.gif)
+
+
 ## Quick Start 🚀
 ### Install dependencies
 ```
