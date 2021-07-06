@@ -8,10 +8,9 @@
 // ]
 
 {
-  "presets": [["@babel/preset-env"], 
-            ["@babel/preset-react", {}, 'unique-name']],
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
-      "@babel/proposal-class-properties",
-      "@babel/proposal-object-rest-spread"
+      ["@babel/proposal-class-properties"],
+      ["@babel/proposal-object-rest-spread", {}, 'some-unique-name']
   ]
 }
